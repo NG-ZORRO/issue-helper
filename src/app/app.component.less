@@ -1,0 +1,268 @@
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+  line-height: 1.5;
+  color: #666;
+  font-size: 14px !important;
+  background: #FFF;
+  transition: background 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  overflow-x: hidden;
+}
+
+a {
+  transition: color .3s ease;
+}
+
+.main-wrapper {
+  background: #ececec;
+  overflow: hidden;
+  padding: 24px 0 0;
+  margin-bottom: 24px;
+  // TODO remove will cause update layer tree
+}
+
+div.main-container {
+  background: #fff;
+  min-height: 500px;
+  overflow: hidden;
+  border-left: 1px solid #e9e9e9;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.page-wrapper {
+  background-blend-mode: multiply;
+  background-size: 100%;
+  animation: pageEnter .45s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  background: #ececec;
+}
+
+@header-height: 60px;
+
+#header {
+  transition: opacity 0.5s;
+  background: #ffffff;
+  height: @header-height;
+  margin-bottom: 24px;
+  width: 100%;
+  .ant-menu-horizontal {
+    border-bottom: none;
+  }
+  &.home-nav-bottom {
+    background: rgba(255, 255, 255, 0.9);
+    //border-bottom-color: #EBEDEE;
+    .search {
+      border-left-color: #EBEDEE;
+    }
+    a {
+      color: #666;
+    }
+  }
+}
+
+#logo {
+  float: left;
+  height: 80px;
+  line-height: 80px;
+}
+
+#logo img {
+  height: 80px;
+  width: 40px;
+  margin: auto 20px;
+}
+
+#logo span {
+  float: right;
+  font-size: 16px;
+  font-family: 'Raleway', 'Hiragino Sans GB', sans-serif;
+  height: 80px;
+  line-height: 80px;
+  color: #108ee9;
+}
+
+#lang {
+  float: right;
+  margin-top: 29px;
+  margin-left: 12px;
+}
+
+footer {
+  clear: both;
+  text-align: center;
+  background: #fff;
+  position: relative;
+  z-index: 1;
+  color: #000000;
+  box-shadow: 0 1000px 0 1000px #fff;
+  padding: 0 50px;
+  color: rgba(0, 0, 0, .65);
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/**
+   markdown
+ */
+.markdown {
+  img {
+    max-width: 100%;
+  }
+
+  h1, h2, h3, h4 {
+    color: #111111;
+    margin-top: 1em;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: Georgia, Palatino, serif;
+  }
+
+  h1, h2, h3, h4, h5, dl {
+    margin-bottom: 16px;
+    padding: 0;
+  }
+
+  p {
+    margin-top: 8px;
+    margin-bottom: 3px;
+  }
+  a {
+    color: #0099ff;
+    margin: 0 2px;
+    padding: 0;
+    vertical-align: baseline;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: #ff6600;
+  }
+
+  ul, ol {
+    padding: 0 0 0 18px;
+    margin: 0;
+  }
+
+  li {
+    line-height: 24px;
+  }
+
+  p, ul, ol {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  ol ol, ul ol {
+    list-style-type: lower-roman;
+  }
+
+  pre > code {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    border: 0;
+    display: inline;
+    max-width: initial;
+    padding: 0;
+    margin: 0;
+    overflow: initial;
+    line-height: 1.6em;
+    font-size: .95em;
+    white-space: pre;
+    background: 0 0;
+
+  }
+
+  code {
+    color: #666555;
+  }
+
+  blockquote {
+    font-size: 90%;
+    background: hsla(0, 0%, 94%, .37);
+    padding: 10px;
+    border-left: 4px solid #108ee9;
+    margin: 1em 0;
+  }
+
+  blockquote cite {
+    font-size: 14px;
+    line-height: 18px;
+    color: #bfbfbf;
+  }
+
+  blockquote p {
+    color: #666;
+  }
+
+  hr {
+    text-align: left;
+    color: #999;
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    padding: 10px 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  dl dd {
+    padding: 0 16px;
+    margin-bottom: 16px;
+  }
+
+  dd {
+    margin-left: 0;
+  }
+
+  table {
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  table {
+    border: solid #ccc 1px;
+  }
+
+  table thead {
+    background: #ff6600;
+  }
+
+  table td, .table th {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+
+  table th {
+    border-top: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+    padding: 5px;
+    border-left: 1px solid #ccc;
+  }
+}
+
