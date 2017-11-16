@@ -8,7 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  lang = 'en_US';
+  lang = 'zh_CN';
   constructor(private translate: TranslateService) {
     translate.setDefaultLang(this.lang);
     translate.use(this.lang);

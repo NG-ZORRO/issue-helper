@@ -40,7 +40,7 @@ export function createTranslateLoader(http: HttpClient) {
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: 'new-issue',
+        redirectTo: '/new-issue',
         pathMatch: 'full'
       },
       {
@@ -49,7 +49,7 @@ export function createTranslateLoader(http: HttpClient) {
       },
       {
         path: '**',
-        redirectTo: 'new-issue', pathMatch: 'full'
+        redirectTo: '/new-issue', pathMatch: 'full'
       }
     ], {useHash: true, preloadingStrategy: PreloadAllModules})
   ],

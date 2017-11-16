@@ -38,5 +38,6 @@ testem.log
 /e2e/*.map
 
 # System Files
+package-lock.json
 .DS_Store
 Thumbs.db

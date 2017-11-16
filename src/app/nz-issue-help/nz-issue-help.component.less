@@ -1,37 +1,39 @@
-:host ::ng-deep .paragraph h5 {
-  font-size: 16px
+:host ::ng-deep {
+  .paragraph {
+    h5 {
+      font-size: 16px;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    ul, ol {
+      padding: 0 15px 15px 15px;
+      margin-left: 15px;
+    }
+
+    ul li {
+      margin: 5px 0 5px 10px;
+    }
+
+    ul {
+      list-style-type: disc;
+    }
+
+    ol {
+      list-style-type: decimal;
+    }
+  }
+
+  pre {
+    background-color: #f6f8fa;
+  }
+
+  .preview h2 {
+    color: #666666;
+  }
+
 }
 
-:host ::ng-deep .paragraph h2 {
-  margin-bottom: 10px;
-}
 
-
-:host ::ng-deep .paragraph p {
-  margin-bottom: 15px;
-}
-
-:host ::ng-deep .paragraph ol, :host ::ng-deep .paragraph ul {
-  padding: 0 15px 15px;
-  margin-left: 15px
-}
-
-:host ::ng-deep .paragraph ul {
-  list-style-type: disc
-}
-
-:host ::ng-deep .paragraph ol {
-  list-style-type: decimal
-}
-
-:host ::ng-deep ol, ul {
-  list-style: none;
-}
-
-:host ::ng-deep pre {
-  background-color: #f6f8fa;
-}
-
-:host ::ng-deep .preview h2 {
-  color: #666666;
-}

@@ -6,16 +6,15 @@
       <div class="issue-notice" *ngIf="translate.currentLang=='zh_CN'">
         <div>
           <h2 id="-">在你开始之前...</h2>
-          <p>首先，虽然我们为了中文用户的方便提供了中文的表单，但在填写时请<strong>尽量使用英文</strong>。NG ZORRO 社区不只有中国人。如果你想让尽可能多的人能够看懂你的 issue，就请尽量用英文。
+          <p>首先，虽然我们为了中文用户的方便提供了中文的表单，但在填写时请<strong>尽量使用英文</strong>。NG ZORRO 社区不只有中国人。如果你想让尽可能多的人能够看懂你的
+            issue，就请尽量用英文。描述性输入请使用<a href="https://segmentfault.com/markdown" target="_blank">&nbsp;Markdown&nbsp;</a>格式。
           </p>
           <p>其次，NG ZORRO 的 issue 列表只接受 bug 报告或是新功能请求 (feature requests)。这意味着<strong>我们不接受用法问题</strong>。如果你开的 issue
             不符合规定，它将会被<strong>立刻关闭</strong>。<a (click)="isIntroVisible=!isIntroVisible">为什么要这么严格？</a></p>
           <p>对于使用中遇到的问题，请使用以下资源：</p>
           <ul>
             <li>仔细阅读 <a href="https://ng.ant.design/#/docs/angular/introduce" target="_blank">文档</a></li>
-            <li>在 <a href="https://stackoverflow.com/questions/ask?tags=antd" target="_blank">StackOverflow</a> (英文) 或是
-              <a
-                href="https://segmentfault.com/t/antd" target="_blank">SegmentFault</a>（中文）搜索和提问
+            <li>官方 Github 上已有的<a href="https://github.com/NG-ZORRO/ng-zorro-antd/issues" target="_blank"> Issues </a>提问。
             </li>
           </ul>
           <p>最后，在开 issue 前，可以先搜索以下以往的旧 issue - 你遇到的问题可能已经有人提了，也可能已经在最新版本中被修正。注意：如果你发现一个已经关闭的旧 issue 在最新版本中仍然存在，请不要在旧
@@ -32,152 +31,197 @@
           <ul>
             <li>Read the <a href="hhttps://ng.ant.design/#/docs/angular/introduce">docs</a></li>
             <li>Look for / ask questions on <a
-              href="https://stackoverflow.com/questions/ask?tags=antd">StackOverflow</a></li>
+              href="https://github.com/NG-ZORRO/ng-zorro-antd/issues"> Github Issues </a></li>
           </ul>
           <p>Also try to search for your issue - it may have already been answered or even fixed in the development
             branch. However, if you find that an old, closed issue still persists in the latest version, you should open
             a new issue using the form below instead of commenting on the old issue.</p>
+          <p>Please use <a href="https://segmentfault.com/markdown" target="_blank">&nbsp;Markdown&nbsp;</a>to format
+            your description!</p>
         </div>
       </div>
       <div class="form">
         <form nz-form [nzType]="'horizontal'" [formGroup]="issueType=='bug'?validateForm:validateFeatureForm">
           <div nz-form-item nz-row>
-            <div nz-form-label nz-col [nzSpan]="3">
-              <label nz-form-item-required>{{'issue.repo'|translate}}</label>
+            <div nz-col [nzSpan]="11">
+              <div nz-form-label nz-col [nzSpan]="24">
+                <label nz-form-item-required>{{'issue.repo'|translate}}</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="24">
+                <nz-select formControlName="repository" [nzSize]="'large'" [nzDisabled]="true">
+                  <nz-option *ngFor="let repository of issueOpts.repositories" [nzLabel]="repository"
+                             [nzValue]="repository"></nz-option>
+                </nz-select>
+                <div nz-form-explain>{{'issue.repoHelp'|translate}}</div>
+              </div>
             </div>
-            <div nz-form-control nz-col [nzSpan]="6">
-              <nz-select formControlName="repository" [nzSize]="'large'" [nzDisabled]="true">
-                <nz-option *ngFor="let repository of issueOpts.repositories" [nzLabel]="repository"
-                           [nzValue]="repository"></nz-option>
-              </nz-select>
-              <div nz-form-explain>{{'issue.repoHelp'|translate}}</div>
-            </div>
-            <div nz-form-label nz-col [nzSpan]="5">
-              <label nz-form-item-required>{{'issue.type'|translate}}</label>
-            </div>
-            <div nz-col [nzSpan]="7">
-              <nz-select [nzSize]="'large'" [(ngModel)]="issueType" [ngModelOptions]="{standalone: true}">
-                <nz-option *ngFor="let feature of issueOpts.features" [nzLabel]="feature.name|translate"
-                           [nzValue]="feature.value"></nz-option>
-              </nz-select>
+            <div nz-col [nzSpan]="12" [nzOffset]="1">
+              <div nz-form-label nz-col [nzSpan]="24">
+                <label nz-form-item-required>{{'issue.type'|translate}}</label>
+              </div>
+              <div nz-col [nzSpan]="24">
+                <nz-select [nzSize]="'large'" [(ngModel)]="issueType" [ngModelOptions]="{standalone: true}">
+                  <nz-option *ngFor="let feature of issueOpts.features" [nzLabel]="feature.name|translate"
+                             [nzValue]="feature.value"></nz-option>
+                </nz-select>
+              </div>
             </div>
           </div>
           <div nz-form-item nz-row>
-            <div nz-form-label nz-col [nzSpan]="3">
-              <label nz-form-item-required>{{'issue.title'|translate}}</label>
+            <div nz-col [nzSpan]="24">
+              <div nz-form-label nz-col [nzSpan]="24">
+                <label nz-form-item-required>{{'issue.title'|translate}}</label>
+              </div>
+              <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('issue_title')">
+                <nz-input  #issueT formControlName="issue_title" [nzSize]="'large'">
+                </nz-input>
+              </div>
             </div>
-            <div nz-form-control nz-col [nzSpan]="18" [nzValidateStatus]="getFormControl('issue_title')">
-              <nz-input formControlName="issue_title" [nzSize]="'large'">
-              </nz-input>
+          </div>
+          <div nz-form-item nz-row *ngIf="searchIssues.length>0">
+            <div nz-col [nzSpan]="24" class="paragraph search-result">
+              <h3>Similar Issues:</h3>
+              <ul>
+                <li *ngFor="let issue of searchIssues;">
+                  <a target="_blank" href="{{issue.html_url}}">{{issue.title}}</a>
+                </li>
+              </ul>
             </div>
           </div>
           <div *ngIf="issueType=='feature'">
             <div nz-form-item nz-row>
-              <div nz-form-label nz-col [nzSpan]="'12'" [nzOffset]="'1'" style="text-align: left;">
-                <label nz-form-item-required>{{'issue.motivation'|translate}}</label>
-              </div>
-              <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="'3'"
-                   [nzValidateStatus]="getFormControl('motivation')">
-                <nz-input formControlName="motivation" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                </nz-input>
-                <div nz-form-explain>
-                  {{'issue.motivationHelp' | translate}}
+              <div nz-col [nzSpan]="24">
+                <div nz-form-label nz-col [nzSpan]="24">
+                  <label nz-form-item-required>{{'issue.motivation'|translate}}</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="24"
+                     [nzValidateStatus]="getFormControl('motivation')">
+                  <nz-input formControlName="motivation" [nzType]="'textarea'" [nzAutosize]="autoSize">
+                  </nz-input>
+                  <div nz-form-explain>
+                    {{'issue.motivationHelp' | translate}}
+                  </div>
                 </div>
               </div>
+
             </div>
             <div nz-form-item nz-row>
-              <div nz-form-label nz-col [nzSpan]="'12'" [nzOffset]="'1'" style="text-align: left;">
-                <label nz-form-item-required>{{'issue.proposal'|translate}}</label>
-              </div>
-              <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="'3'"
-                   [nzValidateStatus]="getFormControl('proposal')">
-                <nz-input formControlName="proposal" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                </nz-input>
-                <div nz-form-explain>
-                  {{'issue.proposalHelp' | translate}}
+              <div nz-col [nzSpan]="24">
+                <div nz-form-label nz-col [nzSpan]="24">
+                  <label nz-form-item-required>{{'issue.proposal'|translate}}</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="24"
+                     [nzValidateStatus]="getFormControl('proposal')">
+                  <nz-input formControlName="proposal" [nzType]="'textarea'" [nzAutosize]="autoSize">
+                  </nz-input>
+                  <div nz-form-explain>
+                    {{'issue.proposalHelp' | translate}}
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
           <!--BUG-->
           <div *ngIf="issueType=='bug'">
             <div nz-form-item nz-row>
-              <div nz-form-label nz-col [nzSpan]="3">
-                <label nz-form-item-required>{{'issue.version'|translate }}</label>
+              <div nz-col [nzSpan]="11">
+                <div nz-form-label nz-col [nzSpan]="24">
+                  <label nz-form-item-required>{{'issue.version'|translate }}</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('version')">
+                  <nz-select formControlName="version" [nzSize]="'large'">
+                    <nz-option *ngFor="let version of issueOpts.versions" [nzLabel]="version"
+                               [nzValue]="version"></nz-option>
+                  </nz-select>
+                  <div nz-form-explain>{{'issue.versionHelp'|translate}}</div>
+                </div>
               </div>
-              <div nz-form-control nz-col [nzSpan]="6" [nzValidateStatus]="getFormControl('version')">
-                <nz-select formControlName="version" [nzSize]="'large'">
-                  <nz-option *ngFor="let version of issueOpts.versions" [nzLabel]="version"
-                             [nzValue]="version"></nz-option>
-                </nz-select>
-                <div nz-form-explain>{{'issue.versionHelp'|translate}}</div>
-              </div>
-              <div nz-form-label nz-col [nzSpan]="5">
-                <label nz-form-item-required>{{'issue.reproduction'|translate}}</label>
-              </div>
-              <div nz-form-control nz-col [nzSpan]="7" [nzValidateStatus]="getFormControl('link')">
-                <nz-input formControlName="link" [nzSize]="'large'"
-                          pattern="(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]">
-                </nz-input>
-                <div nz-form-explain>
-                  {{'issue.reproductionHelp' | translate}}&nbsp;<a href="https://stackblitz.com/edit/ng-zorro-antd-setup?file=app%2Fapp.component.ts" target="_blank">ng-zorro-antd</a>.
+              <div nz-col [nzSpan]="12" [nzOffset]="1">
+                <div nz-form-label nz-col [nzSpan]="24">
+                  <label nz-form-item-required>{{'issue.reproduction'|translate}}</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('link')">
+                  <nz-input formControlName="link" [nzSize]="'large'"
+                            pattern="(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]">
+                  </nz-input>
+                  <div nz-form-explain>
+                    {{'issue.reproductionHelp' | translate}}&nbsp;<a
+                    href="https://stackblitz.com/edit/ng-zorro-antd-setup?file=app%2Fapp.component.ts" target="_blank">stackblitz</a>
+                    / <a href="http://plnkr.co/edit/tpl:sKWy62" target="_blank">plnkr</a>.
+                  </div>
                 </div>
               </div>
             </div>
             <div nz-form-item nz-row>
-              <div nz-form-label nz-col [nzSpan]="3">
-                <label nz-form-item-required>{{'issue.environment'|translate}}</label>
-              </div>
-              <div nz-form-control nz-col [nzSpan]="18" [nzValidateStatus]="getFormControl('environment')">
-                <nz-input formControlName="environment" [nzSize]="'large'">
-                </nz-input>
-                <div nz-form-explain>{{'issue.environmentHelp'|translate}}</div>
-              </div>
-            </div>
-            <div nz-form-item nz-row>
-              <div nz-form-label nz-col [nzSpan]="'12'" [nzOffset]="'1'" style="text-align: left;">
-                <label nz-form-item-required>{{'issue.steps'|translate}}</label>
-              </div>
-              <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="'3'" [nzValidateStatus]="getFormControl('step')">
-                <nz-input formControlName="step" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                </nz-input>
-                <div nz-form-explain>
-                  {{'issue.stepsHelp' | translate}}
+              <div nz-col [nzSpan]="24">
+                <div nz-form-label nz-col [nzSpan]="24">
+                  <label nz-form-item-required>{{'issue.environment'|translate}}</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('environment')">
+                  <nz-input formControlName="environment" [nzSize]="'large'">
+                  </nz-input>
+                  <div nz-form-explain>{{'issue.environmentHelp'|translate}}</div>
                 </div>
               </div>
             </div>
             <div nz-form-item nz-row>
-              <div nz-form-label nz-col [nzSpan]="'12'" [nzOffset]="'1'" style="text-align: left;">
-                <label nz-form-item-required>{{'issue.expected'|translate}}
-                </label>
-              </div>
-              <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="'3'"
-                   [nzValidateStatus]="getFormControl('expect_result')">
-                <nz-input formControlName="expect_result" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                </nz-input>
-              </div>
-            </div>
-            <div nz-form-item nz-row>
-              <div nz-form-label nz-col [nzSpan]="'12'" [nzOffset]="'1'" style="text-align: left;">
-                <label nz-form-item-required>{{'issue.actually'|translate}}
-                </label>
-              </div>
-              <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="'3'"
-                   [nzValidateStatus]="getFormControl('exist_result')">
-                <nz-input formControlName="exist_result" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                </nz-input>
-              </div>
-            </div>
-            <div nz-form-item nz-row>
-              <div nz-form-label nz-col [nzSpan]="'12'" [nzOffset]="'1'" style="text-align: left;">
-                <label>{{'issue.extra'|translate}}</label>
-              </div>
-              <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="'3'">
-                <nz-input formControlName="addtion" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                </nz-input>
-                <div nz-form-explain>{{'issue.extraHelp'|translate}}
+              <div nz-col [nzSpan]="24">
+                <div nz-form-label nz-col [nzSpan]="24">
+                  <label nz-form-item-required>{{'issue.steps'|translate}}</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('step')">
+                  <nz-input formControlName="step" [nzType]="'textarea'" [nzAutosize]="autoSize">
+                  </nz-input>
+                  <div nz-form-explain>
+                    {{'issue.stepsHelp' | translate}}
+                  </div>
                 </div>
               </div>
+
+            </div>
+            <div nz-form-item nz-row>
+              <div nz-col [nzSpan]="24">
+                <div nz-form-label nz-col [nzSpan]="24">
+                  <label nz-form-item-required>{{'issue.expected'|translate}}
+                  </label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="24"
+                     [nzValidateStatus]="getFormControl('expect_result')">
+                  <nz-input formControlName="expect_result" [nzType]="'textarea'" [nzAutosize]="autoSize">
+                  </nz-input>
+                </div>
+              </div>
+
+            </div>
+            <div nz-form-item nz-row>
+              <div nz-col [nzSpan]="24">
+                <div nz-form-label nz-col [nzSpan]="24">
+                  <label nz-form-item-required>{{'issue.actually'|translate}}
+                  </label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="24"
+                     [nzValidateStatus]="getFormControl('exist_result')">
+                  <nz-input formControlName="exist_result" [nzType]="'textarea'" [nzAutosize]="autoSize">
+                  </nz-input>
+                </div>
+              </div>
+
+
+            </div>
+            <div nz-form-item nz-row>
+              <div nz-col [nzSpan]="24">
+                <div nz-form-label nz-col [nzSpan]="24">
+                  <label>{{'issue.extra'|translate}}</label>
+                </div>
+                <div nz-form-control nz-col [nzSpan]="24">
+                  <nz-input formControlName="addtion" [nzType]="'textarea'" [nzAutosize]="autoSize">
+                  </nz-input>
+                  <div nz-form-explain>{{'issue.extraHelp'|translate}}
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -239,6 +283,7 @@
       <!--preview modal-->
       <nz-modal [nzVisible]="isPreviewVisible" [nzTitle]="'previewModal.title'|translate"
                 [nzContent]="modalPreviewContent"
+                [nzWidth]="640"
                 [nzFooter]="modalPreviewFooter"
                 (nzOnCancel)="handleCancel($event)"
                 (nzOnOk)="handleOk($event)">

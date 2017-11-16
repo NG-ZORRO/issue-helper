@@ -8,6 +8,11 @@ import * as HighLight from 'highlight.js';
 
 import {GithubService} from '../services/github.service';
 import {TranslateService} from '@ngx-translate/core';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/defaultIfEmpty';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/do';
 
 
 @Component({
@@ -20,7 +25,7 @@ export class NzIssueHelpComponent implements OnInit {
   validateFeatureForm: FormGroup;
   autoSize = {
     minRows: 4,
-    maxRows: 99
+    maxRows: 999
   };
   isIntroVisible = false;
   isPreviewVisible = false;
@@ -40,6 +45,7 @@ export class NzIssueHelpComponent implements OnInit {
     ],
     versions: []
   };
+  searchIssues: any = [];
 
   constructor(private fb: FormBuilder, private _githubApiService: GithubService, public translate: TranslateService) {
   }
@@ -69,6 +75,32 @@ export class NzIssueHelpComponent implements OnInit {
       }
       this.validateForm.controls['version'].setValue(this.issueOpts.versions[0]);
     });
+    this.validateForm.controls['issue_title'].valueChanges
+      .do(data => this.searchIssues = [])
+      .debounceTime(400).distinctUntilChanged().filter(search => search.replace(' ', '') !== '')
+      .subscribe(_ => {
+        // 搜索框值发生变化
+        this._githubApiService.fetchIssues(this.getFormControl('issue_title').value).subscribe(issues => {
+          if (issues['items']) {
+            this.searchIssues = issues['items'];
+          } else {
+            this.searchIssues = [];
+          }
+        });
+      });
+    this.validateFeatureForm.controls['issue_title'].valueChanges
+      .do(data => this.searchIssues = [])
+      .debounceTime(400).distinctUntilChanged().filter(search => search.replace(' ', '') !== '')
+      .subscribe(_ => {
+        // 搜索框值发生变化
+        this._githubApiService.fetchIssues(this.getFormControl('issue_title').value).subscribe(issues => {
+          if (issues['items']) {
+            this.searchIssues = issues['items'];
+          } else {
+            this.searchIssues = [];
+          }
+        });
+      });
   }
 
   getFormControl(name) {
