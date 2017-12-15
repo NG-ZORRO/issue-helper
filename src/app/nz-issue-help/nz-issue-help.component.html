@@ -2,7 +2,7 @@
   <nz-content>
     <nz-breadcrumb>
     </nz-breadcrumb>
-    <div style="background:#fff; padding: 34px;" class="paragraph">
+    <div class="paragraph paragraph-container">
       <div class="issue-notice" *ngIf="translate.currentLang=='zh_CN'">
         <div>
           <h2 id="-">在你开始之前...</h2>
@@ -60,7 +60,7 @@
                 <label nz-form-item-required>{{'issue.type'|translate}}</label>
               </div>
               <div nz-col [nzSpan]="24">
-                <nz-select [nzSize]="'large'" [(ngModel)]="issueType" [ngModelOptions]="{standalone: true}">
+                <nz-select [nzSize]="'large'" [(ngModel)]="issueType" (ngModelChange)="changeType()" [ngModelOptions]="{standalone: true}">
                   <nz-option *ngFor="let feature of issueOpts.features" [nzLabel]="feature.name|translate"
                              [nzValue]="feature.value"></nz-option>
                 </nz-select>
@@ -73,7 +73,7 @@
                 <label nz-form-item-required>{{'issue.title'|translate}}</label>
               </div>
               <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('issue_title')">
-                <nz-input  #issueT formControlName="issue_title" [nzSize]="'large'">
+                <nz-input #issueT formControlName="issue_title" [nzSize]="'large'">
                 </nz-input>
               </div>
             </div>
@@ -142,8 +142,7 @@
                   <label nz-form-item-required>{{'issue.reproduction'|translate}}</label>
                 </div>
                 <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('link')">
-                  <nz-input formControlName="link" [nzSize]="'large'"
-                            pattern="(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]">
+                  <nz-input formControlName="link" [nzSize]="'large'">
                   </nz-input>
                   <div nz-form-explain>
                     {{'issue.reproductionHelp' | translate}}&nbsp;<a

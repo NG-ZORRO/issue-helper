@@ -1,13 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup, Validators
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as marked from 'marked';
-import * as HighLight from 'highlight.js';
 
-import {GithubService} from '../services/github.service';
-import {TranslateService} from '@ngx-translate/core';
+import { GithubService } from '../services/github.service';
+import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/defaultIfEmpty';
@@ -54,7 +50,7 @@ export class NzIssueHelpComponent implements OnInit {
     this.validateForm = this.fb.group({
       repository: ['ng-zorro-antd', [Validators.required]],
       issue_title: ['', [Validators.required]],
-      link: ['', [Validators.required]],
+      link: ['', [this.replinkValidator]],
       version: ['', [Validators.required]],
       environment: ['', [Validators.required]],
       step: ['', [Validators.required]],
@@ -77,10 +73,10 @@ export class NzIssueHelpComponent implements OnInit {
     });
     this.validateForm.controls['issue_title'].valueChanges
       .do(data => this.searchIssues = [])
-      .debounceTime(400).distinctUntilChanged().filter(search => search.replace(' ', '') !== '')
-      .subscribe(_ => {
+      .debounceTime(300).distinctUntilChanged().filter(search => search.replace(' ', '') !== '')
+      .subscribe(data => {
         // 搜索框值发生变化
-        this._githubApiService.fetchIssues(this.getFormControl('issue_title').value).subscribe(issues => {
+        this._githubApiService.fetchIssues(data).subscribe(issues => {
           if (issues['items']) {
             this.searchIssues = issues['items'];
           } else {
@@ -90,10 +86,10 @@ export class NzIssueHelpComponent implements OnInit {
       });
     this.validateFeatureForm.controls['issue_title'].valueChanges
       .do(data => this.searchIssues = [])
-      .debounceTime(400).distinctUntilChanged().filter(search => search.replace(' ', '') !== '')
-      .subscribe(_ => {
+      .debounceTime(300).distinctUntilChanged().filter(search => search.replace(' ', '') !== '')
+      .subscribe(data => {
         // 搜索框值发生变化
-        this._githubApiService.fetchIssues(this.getFormControl('issue_title').value).subscribe(issues => {
+        this._githubApiService.fetchIssues(data).subscribe(issues => {
           if (issues['items']) {
             this.searchIssues = issues['items'];
           } else {
@@ -120,6 +116,14 @@ export class NzIssueHelpComponent implements OnInit {
     this.isPreviewVisible = false;
   }
 
+  /**
+   * 更换issue type
+   * @private
+   */
+  changeType() {
+    this.searchIssues = [];
+  }
+
   _submitForm() {
     const repo = this.getFormControl('repository').value;
     const label = this.issueType === 'feature' ? '&labels=type:feature' : '';
@@ -130,12 +134,20 @@ export class NzIssueHelpComponent implements OnInit {
     );
   }
 
+  replinkValidator = (control: FormControl): { [s: string]: boolean } => {
+    // 匹配预定复现网址
+    const REP_LINK_REGEXP = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]*(stackblitz|plnkr|github)[-A-Za-z0-9+&@#/%?=~_|!:,.;]+/;
+    // 现有网址不可完全复制
+    const REP_LINKS = 'https://stackblitz.com/edit/ng-zorro-antd-setup?file=app%2Fapp.component.ts|http://plnkr.co/edit/tpl:sKWy62';
+    if (!control.value) {
+      return { error: true, required: true };
+    } else if (!REP_LINK_REGEXP.test(control.value) || REP_LINKS.indexOf(control.value) !== -1) {
+      return { error: true, repLink: true };
+    }
+    return null;
+  }
+
   _submitFormPreview() {
-    // marked.setOptions({
-    //   highlight: (code) => {
-    //     return HighLight.highlightAuto(code).value;
-    //   }
-    // });
     if (this.issueType === 'bug') {
       for (const i in this.validateForm.controls) {
         this.validateForm.controls[i].markAsDirty();
