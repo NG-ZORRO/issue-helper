@@ -13,7 +13,7 @@ export class GithubService {
   }
 
   fetchIssues(keyword: string) {
-    return this.http.get(`${this.githubApi}/search/issues?q=is:issue repo:NG-ZORRO/ng-zorro-antd ${keyword}&per_page=5`);
+    return this.http.get(`${this.githubApi}/search/issues?q=is:issue repo:NG-ZORRO/ng-zorro-antd ${keyword}&per_page=7`);
   }
 
 }

@@ -1,305 +1,316 @@
 <nz-layout class="layout">
-  <nz-content>
-    <nz-breadcrumb>
-    </nz-breadcrumb>
-    <div class="paragraph paragraph-container">
-      <div class="issue-notice" *ngIf="translate.currentLang=='zh_CN'">
-        <div>
-          <h2 id="-">在你开始之前...</h2>
-          <p>首先，虽然我们为了中文用户的方便提供了中文的表单，但在填写时请<strong>尽量使用英文</strong>。NG ZORRO 社区不只有中国人。如果你想让尽可能多的人能够看懂你的
-            issue，就请尽量用英文。描述性输入请使用<a href="https://segmentfault.com/markdown" target="_blank">&nbsp;Markdown&nbsp;</a>格式。
-          </p>
-          <p>其次，NG ZORRO 的 issue 列表只接受 bug 报告或是新功能请求 (feature requests)。这意味着<strong>我们不接受用法问题</strong>。如果你开的 issue
-            不符合规定，它将会被<strong>立刻关闭</strong>。<a (click)="isIntroVisible=!isIntroVisible">为什么要这么严格？</a></p>
-          <p>对于使用中遇到的问题，请使用以下资源：</p>
-          <ul>
-            <li>仔细阅读 <a href="https://ng.ant.design/#/docs/angular/introduce" target="_blank">文档</a></li>
-            <li>官方 Github 上已有的<a href="https://github.com/NG-ZORRO/ng-zorro-antd/issues" target="_blank"> Issues </a>提问。
-            </li>
-          </ul>
-          <p>最后，在开 issue 前，可以先搜索以下以往的旧 issue - 你遇到的问题可能已经有人提了，也可能已经在最新版本中被修正。注意：如果你发现一个已经关闭的旧 issue 在最新版本中仍然存在，请不要在旧
-            issue 下面留言，而应该用下面的表单开一个新的 issue。</p>
+    <nz-content>
+        <nz-breadcrumb>
+        </nz-breadcrumb>
+        <div class="paragraph paragraph-container">
+            <div class="issue-notice" *ngIf="translate.currentLang=='zh_CN'">
+                <div>
+                    <h2 id="-">在你开始之前...</h2>
+                    <p>首先，虽然我们为了中文用户的方便提供了中文的表单，但在填写时请<strong>尽量使用英文</strong>。NG ZORRO 社区不只有中国人。如果你想让尽可能多的人能够看懂你的
+                        issue，就请尽量用英文。描述性输入请使用<a href="https://guides.github.com/features/mastering-markdown/" target="_blank">&nbsp;Markdown&nbsp;</a>格式。
+                    </p>
+                    <p>其次，NG ZORRO 的 issue 列表只接受 bug 报告或是新功能请求 (feature requests)。这意味着<strong>我们不接受用法问题</strong>。如果你开的
+                        issue
+                        不符合规定，它将会被<strong>立刻关闭</strong>。<a (click)="isIntroVisible=!isIntroVisible">为什么要这么严格？</a></p>
+                    <p>对于使用中遇到的问题，请使用以下资源：</p>
+                    <ul>
+                        <li>仔细阅读 <a href="https://ng.ant.design/#/docs/angular/introduce" target="_blank">文档</a></li>
+                        <li>官方 Github 上已有的<a href="https://github.com/NG-ZORRO/ng-zorro-antd/issues" target="_blank">
+                            Issues </a>提问。
+                        </li>
+                    </ul>
+                    <p>最后，在开 issue 前，可以先搜索以下以往的旧 issue - 你遇到的问题可能已经有人提了，也可能已经在最新版本中被修正。注意：如果你发现一个已经关闭的旧 issue
+                        在最新版本中仍然存在，请不要在旧
+                        issue 下面留言，而应该用下面的表单开一个新的 issue。</p>
+                </div>
+            </div>
+            <div class="issue-notice" *ngIf="translate.currentLang=='en_US'">
+                <div>
+                    <h2 id="before-you-start-">Before You Start...</h2>
+                    <p>The issue list is reserved exclusively for bug reports and feature requests. That means we do not
+                        accept
+                        usage questions. If you open an issue that does not conform to the requirements, <strong>it will
+                            be closed
+                            immediately</strong>. <a (click)="isIntroVisible=!isIntroVisible">Why are we so strict about
+                            this?</a></p>
+                    <p>For usage questions, please use the following resources:</p>
+                    <ul>
+                        <li>Read the <a href="hhttps://ng.ant.design/#/docs/angular/introduce">docs</a></li>
+                        <li>Look for / ask questions on <a
+                                href="https://github.com/NG-ZORRO/ng-zorro-antd/issues"> Github Issues </a></li>
+                    </ul>
+                    <p>Also try to search for your issue - it may have already been answered or even fixed in the
+                        development
+                        branch. However, if you find that an old, closed issue still persists in the latest version, you
+                        should open
+                        a new issue using the form below instead of commenting on the old issue.</p>
+                    <p>Please use <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">&nbsp;Markdown&nbsp;</a>to
+                        format
+                        your description!</p>
+                </div>
+            </div>
+            <div class="form" nz-row>
+                <form nz-form [nzLayout]="'horizontal'" [formGroup]="issueType=='bug'?validateForm:validateFeatureForm">
+                    <div nz-col [nzSpan]="11">
+                        <nz-form-item>
+                            <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="repository">
+                                {{'issue.repo'|translate}}
+                            </nz-form-label>
+                            <nz-form-control nz-col [nzSpan]="24">
+                                <nz-select formControlName="repository" [nzDisabled]="true">
+                                    <nz-option *ngFor="let repository of issueOpts.repositories" [nzLabel]="repository"
+                                               [nzValue]="repository"></nz-option>
+                                </nz-select>
+                                <nz-form-explain>{{'issue.repoHelp'|translate}}</nz-form-explain>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzSpan]="12" [nzOffset]="1">
+                        <nz-form-item>
+                            <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="issueType">
+                                {{'issue.type'|translate}}
+                            </nz-form-label>
+                            <nz-form-control nz-col [nzSpan]="24">
+                                <nz-select [(ngModel)]="issueType" (ngModelChange)="changeType()"
+                                           [ngModelOptions]="{standalone: true}">
+                                    <nz-option *ngFor="let feature of issueOpts.features"
+                                               [nzLabel]="feature.name|translate"
+                                               [nzValue]="feature.value"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzSpan]="24">
+                        <nz-form-item>
+                            <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="issue_title">
+                                {{'issue.title'|translate}}
+                            </nz-form-label>
+                            <nz-form-control nz-col [nzSpan]="24">
+                                <input #issueT nz-input formControlName="issue_title">
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzSpan]="24" *ngIf="searchIssues.length>0">
+                        <div nz-form-item nz-row *ngIf="searchIssues.length>0">
+                            <div nz-col [nzSpan]="24" class="paragraph search-result">
+                                <h3>Similar Issues:</h3>
+                                <ul>
+                                    <li *ngFor="let issue of searchIssues;">
+                                        <a target="_blank" href="{{issue.html_url}}">{{issue.title}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="issueType=='feature'">
+                        <div nz-col [nzSpan]="24">
+                            <nz-form-item>
+                                <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="motivation">
+                                    {{'issue.motivation'|translate}}
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSpan]="24">
+                                <textarea formControlName="motivation" nz-input
+                                          [nzAutosize]="{ minRows: 6, maxRows: 999 }"></textarea>
+                                    <nz-form-explain>{{'issue.motivationHelp'|translate}}</nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzSpan]="24">
+                            <nz-form-item>
+                                <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="proposal">
+                                    {{'issue.proposal'|translate}}
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSpan]="24">
+                                <textarea formControlName="proposal" nz-input
+                                          [nzAutosize]="{ minRows: 6, maxRows: 999 }"></textarea>
+                                    <nz-form-explain>{{'issue.proposalHelp'|translate}}</nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="issueType=='bug'">
+                        <div nz-col [nzSpan]="11">
+                            <nz-form-item>
+                                <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="version">
+                                    {{'issue.version'|translate}}
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSpan]="24">
+                                    <nz-select formControlName="version">
+                                        <nz-option *ngFor="let version of issueOpts.versions" [nzLabel]="version"
+                                                   [nzValue]="version"></nz-option>
+                                    </nz-select>
+                                    <nz-form-explain>{{'issue.versionHelp'|translate}}</nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzSpan]="12" [nzOffset]="1">
+                            <nz-form-item>
+                                <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="link">
+                                    {{'issue.reproduction'|translate}}
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSpan]="24">
+                                    <input nz-input formControlName="link">
+                                    <nz-form-explain>
+                                        {{'issue.reproductionHelp' | translate}}&nbsp;<a
+                                            href="https://stackblitz.com/edit/ng-zorro-antd-setup?file=app%2Fapp.component.ts"
+                                            target="_blank">stackblitz</a>
+                                    </nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzSpan]="24">
+                            <nz-form-item>
+                                <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="environment">
+                                    {{'issue.environment'|translate}}
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSpan]="24">
+                                    <input nz-input formControlName="environment">
+                                    <nz-form-explain>{{'issue.environmentHelp'|translate}}</nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzSpan]="24" *ngIf="issueType=='feature'">
+                            <nz-form-item>
+                                <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="proposal">
+                                    {{'issue.proposal'|translate}}
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSpan]="24">
+                                <textarea formControlName="proposal" nz-input
+                                          [nzAutosize]="{ minRows: 6, maxRows: 999 }"></textarea>
+                                    <nz-form-explain>{{'issue.proposalHelp'|translate}}</nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzSpan]="24">
+                            <nz-form-item>
+                                <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="step">
+                                    {{'issue.steps'|translate}}
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSpan]="24">
+                                <textarea formControlName="step" nz-input
+                                          [nzAutosize]="{ minRows: 6, maxRows: 999 }"></textarea>
+                                    <nz-form-explain>{{'issue.stepsHelp' | translate}}</nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzSpan]="24">
+                            <nz-form-item>
+                                <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="expect_result">
+                                    {{'issue.expected'|translate}}
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSpan]="24">
+                                <textarea formControlName="expect_result" nz-input
+                                          [nzAutosize]="{ minRows: 6, maxRows: 999 }"></textarea>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzSpan]="24">
+                            <nz-form-item>
+                                <nz-form-label nz-col [nzSpan]="24" nzRequired nzFor="exist_result">
+                                    {{'issue.actually'|translate}}
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSpan]="24">
+                                <textarea formControlName="exist_result" nz-input
+                                          [nzAutosize]="{ minRows: 6, maxRows: 999 }"></textarea>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzSpan]="24">
+                            <nz-form-item>
+                                <nz-form-label nz-col [nzSpan]="24" nzFor="addtion">
+                                    {{'issue.extra'|translate}}
+                                </nz-form-label>
+                                <nz-form-control nz-col [nzSpan]="24">
+                                <textarea formControlName="addtion" nz-input
+                                          [nzAutosize]="{ minRows: 1, maxRows: 999 }"></textarea>
+                                    <nz-form-explain>{{'issue.extraHelp' | translate}}</nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                    </ng-container>
+                    <div nz-col [nzSpan]="13" [nzOffset]="11">
+                        <button name="preview" nz-button nzType="primary" (click)="_submitFormPreview()"><i class="anticon anticon-scan"></i>
+                            {{'issue.preview'|translate}}
+                        </button>
+                    </div>
+                </form>
+
+            </div>
         </div>
-      </div>
-      <div class="issue-notice" *ngIf="translate.currentLang=='en_US'">
-        <div>
-          <h2 id="before-you-start-">Before You Start...</h2>
-          <p>The issue list is reserved exclusively for bug reports and feature requests. That means we do not accept
-            usage questions. If you open an issue that does not conform to the requirements, <strong>it will be closed
-              immediately</strong>. <a (click)="isIntroVisible=!isIntroVisible">Why are we so strict about this?</a></p>
-          <p>For usage questions, please use the following resources:</p>
-          <ul>
-            <li>Read the <a href="hhttps://ng.ant.design/#/docs/angular/introduce">docs</a></li>
-            <li>Look for / ask questions on <a
-              href="https://github.com/NG-ZORRO/ng-zorro-antd/issues"> Github Issues </a></li>
-          </ul>
-          <p>Also try to search for your issue - it may have already been answered or even fixed in the development
-            branch. However, if you find that an old, closed issue still persists in the latest version, you should open
-            a new issue using the form below instead of commenting on the old issue.</p>
-          <p>Please use <a href="https://segmentfault.com/markdown" target="_blank">&nbsp;Markdown&nbsp;</a>to format
-            your description!</p>
+        <div class="modal-full">
+            <nz-modal [nzVisible]="isIntroVisible" [nzTitle]="'intro.modal'|translate" [nzContent]="modalContent"
+                      [nzFooter]="footer"
+                      (nzOnCancel)="handleCancel($event)"
+                      (nzOnOk)="handleOk($event)">
+                <ng-template #modalContent>
+                    <div class="paragraph" *ngIf="translate.currentLang=='zh_CN'">
+                        <p>维护开源项目是<a
+                                href="https://nolanlawson.com/2017/03/05/what-it-feels-like-to-be-an-open-source-maintainer/"
+                                target="_blank">非常辛苦的工作</a>。随着
+                            NG ZORRO 在社区越来越受欢迎，我们每天都在收到越来越多的问题， bug 报告，功能需求和 Pull Requests。</p>
+                        <p>作为一个完全免费使用的开源项目，NG ZORRO 的维护人手是有限的。这意味着想要让项目长期的可持续发展，我们必须：</p>
+                        <ol>
+                            <li>给予更具体的工作更高的优先级（比如 bug 的修复和新功能的开发）；</li>
+                            <li>提高 issue 处理的效率。</li>
+                        </ol>
+                        <p>针对 (1)，我们决定将 GitHub issue 列表严格地限制用于有具体目标和内容的工作。问题和讨论应当发送到更适合它们的场合。</p>
+                        <p>针对 (2)，我们发现影响 issue 处理效率的最大因素是用户在开 issue 时没有提供足够的信息。这导致我们需要花费大量的时间去跟用户来回沟通，只为了获得一些基本信息好让我们对
+                            issue
+                            进行真正的分析。这正是我们开发这个 app 的理由：我们要确保每个新 issue 都提供了必需的信息，这样能节省维护者和开发者双方的时间。</p>
+                        <p>最重要的是，请明白一件事：开源项目的用户和维护者之间并不是甲方和乙方的关系，issue 也不是客服。在开 issue
+                            的时候，请抱着一种『一起合作来解决这个问题』的心态，不要期待我们单方面地为你服务。</p>
+                    </div>
+                    <div class="paragraph" *ngIf="translate.currentLang=='en_US'">
+                        <p>Maintaining open source projects is <a
+                                href="https://nolanlawson.com/2017/03/05/what-it-feels-like-to-be-an-open-source-maintainer/"
+                                target="_blank">hard work</a>.
+                            As NG ZORRO's user base has grown, we are getting more and more usage questions, bug
+                            reports, feature
+                            requests and pull requests every single day.</p>
+                        <p>As a free and open source project, NG ZORRO also has limited maintainer bandwidth. That means
+                            the only
+                            way to ensure the project's sustainability is to:</p>
+                        <ol>
+                            <li>Prioritize more concrete work (bug fixes and new features);</li>
+                            <li>Improve issue triaging efficiency.</li>
+                        </ol>
+                        <p>For (1), we have decided to use the GitHub issue lists exclusively for work that has
+                            well-defined,
+                            actionable goals. Questions and open ended discussions should be posted to mediums that are
+                            better suited
+                            for them.</p>
+                        <p>For (2), we have found that issues that do not provide proper information upfront usually
+                            results in
+                            terribly inefficient back-and-forth communication just to extract the basic information
+                            needed for actual
+                            triaging. This is exactly why we have created this app: to ensure that every issue is
+                            created with the
+                            necessary information, and to save time on both sides.</p></div>
+                </ng-template>
+                <ng-template #footer>
+                </ng-template>
+            </nz-modal>
+
+            <!--preview modal-->
+            <nz-modal [(nzVisible)]="isPreviewVisible" [nzTitle]="'previewModal.title'|translate"
+                      [nzContent]="modalPreviewContent"
+                      [nzWidth]="640"
+                      [nzFooter]="modalPreviewFooter"
+                      (nzOnCancel)="handleCancel($event)"
+                      (nzOnOk)="handleOk($event)">
+                <ng-template #modalPreviewContent>
+                    <div class="paragraph preview markdown" id="previewContent">
+
+                    </div>
+                </ng-template>
+                <ng-template #modalPreviewFooter>
+                    <div>
+                        <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="_submitForm()">
+                            {{'button.submit'|translate}}
+                        </button>
+                    </div>
+                </ng-template>
+            </nz-modal>
         </div>
-      </div>
-      <div class="form">
-        <form nz-form [nzType]="'horizontal'" [formGroup]="issueType=='bug'?validateForm:validateFeatureForm">
-          <div nz-form-item nz-row>
-            <div nz-col [nzSpan]="11">
-              <div nz-form-label nz-col [nzSpan]="24">
-                <label nz-form-item-required>{{'issue.repo'|translate}}</label>
-              </div>
-              <div nz-form-control nz-col [nzSpan]="24">
-                <nz-select formControlName="repository" [nzSize]="'large'" [nzDisabled]="true">
-                  <nz-option *ngFor="let repository of issueOpts.repositories" [nzLabel]="repository"
-                             [nzValue]="repository"></nz-option>
-                </nz-select>
-                <div nz-form-explain>{{'issue.repoHelp'|translate}}</div>
-              </div>
-            </div>
-            <div nz-col [nzSpan]="12" [nzOffset]="1">
-              <div nz-form-label nz-col [nzSpan]="24">
-                <label nz-form-item-required>{{'issue.type'|translate}}</label>
-              </div>
-              <div nz-col [nzSpan]="24">
-                <nz-select [nzSize]="'large'" [(ngModel)]="issueType" (ngModelChange)="changeType()" [ngModelOptions]="{standalone: true}">
-                  <nz-option *ngFor="let feature of issueOpts.features" [nzLabel]="feature.name|translate"
-                             [nzValue]="feature.value"></nz-option>
-                </nz-select>
-              </div>
-            </div>
-          </div>
-          <div nz-form-item nz-row>
-            <div nz-col [nzSpan]="24">
-              <div nz-form-label nz-col [nzSpan]="24">
-                <label nz-form-item-required>{{'issue.title'|translate}}</label>
-              </div>
-              <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('issue_title')">
-                <nz-input #issueT formControlName="issue_title" [nzSize]="'large'">
-                </nz-input>
-              </div>
-            </div>
-          </div>
-          <div nz-form-item nz-row *ngIf="searchIssues.length>0">
-            <div nz-col [nzSpan]="24" class="paragraph search-result">
-              <h3>Similar Issues:</h3>
-              <ul>
-                <li *ngFor="let issue of searchIssues;">
-                  <a target="_blank" href="{{issue.html_url}}">{{issue.title}}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div *ngIf="issueType=='feature'">
-            <div nz-form-item nz-row>
-              <div nz-col [nzSpan]="24">
-                <div nz-form-label nz-col [nzSpan]="24">
-                  <label nz-form-item-required>{{'issue.motivation'|translate}}</label>
-                </div>
-                <div nz-form-control nz-col [nzSpan]="24"
-                     [nzValidateStatus]="getFormControl('motivation')">
-                  <nz-input formControlName="motivation" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                  </nz-input>
-                  <div nz-form-explain>
-                    {{'issue.motivationHelp' | translate}}
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <div nz-form-item nz-row>
-              <div nz-col [nzSpan]="24">
-                <div nz-form-label nz-col [nzSpan]="24">
-                  <label nz-form-item-required>{{'issue.proposal'|translate}}</label>
-                </div>
-                <div nz-form-control nz-col [nzSpan]="24"
-                     [nzValidateStatus]="getFormControl('proposal')">
-                  <nz-input formControlName="proposal" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                  </nz-input>
-                  <div nz-form-explain>
-                    {{'issue.proposalHelp' | translate}}
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <!--BUG-->
-          <div *ngIf="issueType=='bug'">
-            <div nz-form-item nz-row>
-              <div nz-col [nzSpan]="11">
-                <div nz-form-label nz-col [nzSpan]="24">
-                  <label nz-form-item-required>{{'issue.version'|translate }}</label>
-                </div>
-                <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('version')">
-                  <nz-select formControlName="version" [nzSize]="'large'">
-                    <nz-option *ngFor="let version of issueOpts.versions" [nzLabel]="version"
-                               [nzValue]="version"></nz-option>
-                  </nz-select>
-                  <div nz-form-explain>{{'issue.versionHelp'|translate}}</div>
-                </div>
-              </div>
-              <div nz-col [nzSpan]="12" [nzOffset]="1">
-                <div nz-form-label nz-col [nzSpan]="24">
-                  <label nz-form-item-required>{{'issue.reproduction'|translate}}</label>
-                </div>
-                <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('link')">
-                  <nz-input formControlName="link" [nzSize]="'large'">
-                  </nz-input>
-                  <div nz-form-explain>
-                    {{'issue.reproductionHelp' | translate}}&nbsp;<a
-                    href="https://stackblitz.com/edit/ng-zorro-antd-setup?file=app%2Fapp.component.ts" target="_blank">stackblitz</a>
-                    / <a href="http://plnkr.co/edit/tpl:sKWy62" target="_blank">plnkr</a>.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div nz-form-item nz-row>
-              <div nz-col [nzSpan]="24">
-                <div nz-form-label nz-col [nzSpan]="24">
-                  <label nz-form-item-required>{{'issue.environment'|translate}}</label>
-                </div>
-                <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('environment')">
-                  <nz-input formControlName="environment" [nzSize]="'large'">
-                  </nz-input>
-                  <div nz-form-explain>{{'issue.environmentHelp'|translate}}</div>
-                </div>
-              </div>
-            </div>
-            <div nz-form-item nz-row>
-              <div nz-col [nzSpan]="24">
-                <div nz-form-label nz-col [nzSpan]="24">
-                  <label nz-form-item-required>{{'issue.steps'|translate}}</label>
-                </div>
-                <div nz-form-control nz-col [nzSpan]="24" [nzValidateStatus]="getFormControl('step')">
-                  <nz-input formControlName="step" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                  </nz-input>
-                  <div nz-form-explain>
-                    {{'issue.stepsHelp' | translate}}
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <div nz-form-item nz-row>
-              <div nz-col [nzSpan]="24">
-                <div nz-form-label nz-col [nzSpan]="24">
-                  <label nz-form-item-required>{{'issue.expected'|translate}}
-                  </label>
-                </div>
-                <div nz-form-control nz-col [nzSpan]="24"
-                     [nzValidateStatus]="getFormControl('expect_result')">
-                  <nz-input formControlName="expect_result" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                  </nz-input>
-                </div>
-              </div>
-
-            </div>
-            <div nz-form-item nz-row>
-              <div nz-col [nzSpan]="24">
-                <div nz-form-label nz-col [nzSpan]="24">
-                  <label nz-form-item-required>{{'issue.actually'|translate}}
-                  </label>
-                </div>
-                <div nz-form-control nz-col [nzSpan]="24"
-                     [nzValidateStatus]="getFormControl('exist_result')">
-                  <nz-input formControlName="exist_result" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                  </nz-input>
-                </div>
-              </div>
-
-
-            </div>
-            <div nz-form-item nz-row>
-              <div nz-col [nzSpan]="24">
-                <div nz-form-label nz-col [nzSpan]="24">
-                  <label>{{'issue.extra'|translate}}</label>
-                </div>
-                <div nz-form-control nz-col [nzSpan]="24">
-                  <nz-input formControlName="addtion" [nzType]="'textarea'" [nzAutosize]="autoSize">
-                  </nz-input>
-                  <div nz-form-explain>{{'issue.extraHelp'|translate}}
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div nz-form-item nz-row>
-            <div nz-form-label nz-col [nzSpan]="12">
-              <button nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="_submitFormPreview()">
-                <i class="anticon anticon-scan"></i><span>{{'issue.preview'|translate}}</span>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="modal-full">
-      <nz-modal [nzVisible]="isIntroVisible" [nzTitle]="'intro.modal'|translate" [nzContent]="modalContent"
-                [nzFooter]="footer"
-                (nzOnCancel)="handleCancel($event)"
-                (nzOnOk)="handleOk($event)">
-        <ng-template #modalContent>
-          <div class="paragraph" *ngIf="translate.currentLang=='zh_CN'">
-            <p>维护开源项目是<a
-              href="https://nolanlawson.com/2017/03/05/what-it-feels-like-to-be-an-open-source-maintainer/"
-              target="_blank">非常辛苦的工作</a>。随着
-              NG ZORRO 在社区越来越受欢迎，我们每天都在收到越来越多的问题， bug 报告，功能需求和 Pull Requests。</p>
-            <p>作为一个完全免费使用的开源项目，NG ZORRO 的维护人手是有限的。这意味着想要让项目长期的可持续发展，我们必须：</p>
-            <ol>
-              <li>给予更具体的工作更高的优先级（比如 bug 的修复和新功能的开发）；</li>
-              <li>提高 issue 处理的效率。</li>
-            </ol>
-            <p>针对 (1)，我们决定将 GitHub issue 列表严格地限制用于有具体目标和内容的工作。问题和讨论应当发送到更适合它们的场合。</p>
-            <p>针对 (2)，我们发现影响 issue 处理效率的最大因素是用户在开 issue 时没有提供足够的信息。这导致我们需要花费大量的时间去跟用户来回沟通，只为了获得一些基本信息好让我们对 issue
-              进行真正的分析。这正是我们开发这个 app 的理由：我们要确保每个新 issue 都提供了必需的信息，这样能节省维护者和开发者双方的时间。</p>
-            <p>最重要的是，请明白一件事：开源项目的用户和维护者之间并不是甲方和乙方的关系，issue 也不是客服。在开 issue 的时候，请抱着一种『一起合作来解决这个问题』的心态，不要期待我们单方面地为你服务。</p>
-          </div>
-          <div class="paragraph" *ngIf="translate.currentLang=='en_US'">
-            <p>Maintaining open source projects is <a
-              href="https://nolanlawson.com/2017/03/05/what-it-feels-like-to-be-an-open-source-maintainer/"
-              target="_blank">hard work</a>.
-              As NG ZORRO's user base has grown, we are getting more and more usage questions, bug reports, feature
-              requests and pull requests every single day.</p>
-            <p>As a free and open source project, NG ZORRO also has limited maintainer bandwidth. That means the only
-              way to ensure the project's sustainability is to:</p>
-            <ol>
-              <li>Prioritize more concrete work (bug fixes and new features);</li>
-              <li>Improve issue triaging efficiency.</li>
-            </ol>
-            <p>For (1), we have decided to use the GitHub issue lists exclusively for work that has well-defined,
-              actionable goals. Questions and open ended discussions should be posted to mediums that are better suited
-              for them.</p>
-            <p>For (2), we have found that issues that do not provide proper information upfront usually results in
-              terribly inefficient back-and-forth communication just to extract the basic information needed for actual
-              triaging. This is exactly why we have created this app: to ensure that every issue is created with the
-              necessary information, and to save time on both sides.</p></div>
-        </ng-template>
-        <ng-template #footer>
-        </ng-template>
-      </nz-modal>
-
-      <!--preview modal-->
-      <nz-modal [nzVisible]="isPreviewVisible" [nzTitle]="'previewModal.title'|translate"
-                [nzContent]="modalPreviewContent"
-                [nzWidth]="640"
-                [nzFooter]="modalPreviewFooter"
-                (nzOnCancel)="handleCancel($event)"
-                (nzOnOk)="handleOk($event)">
-        <ng-template #modalPreviewContent>
-          <div class="paragraph preview markdown" id="previewContent">
-
-          </div>
-        </ng-template>
-        <ng-template #modalPreviewFooter>
-          <div>
-            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="_submitForm()"
-                    [nzLoading]="isConfirmLoading">
-              {{'button.submit'|translate}}
-            </button>
-          </div>
-        </ng-template>
-      </nz-modal>
-    </div>
-  </nz-content>
+    </nz-content>
 </nz-layout>

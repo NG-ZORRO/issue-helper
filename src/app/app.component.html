@@ -1,9 +1,9 @@
 <div class="page-wrapper">
   <header id="header" class="clearfix">
     <div nz-row>
-      <div nz-col [nzXs]="'18'" [nzSm]="'18'" [nzMd]="'18'" [nzLg]="'18'" [nzOffset]="'3'">
+      <div nz-col nzSpan="18" nzOffset="3">
         <a id="logo" href>
-          <img alt="logo" src="./assets/img/zorro.svg">
+          <img alt="logo" src="./assets/img/logo.svg">
           <span>Issue Helper</span>
         </a>
         <button id="lang" nz-button [nzType]="'primary'" [nzGhost]="true" style="float: right;" (click)="changeLang()">
@@ -15,7 +15,7 @@
 </div>
 <div class="main-wrapper">
   <div nz-row>
-    <div nz-col class="main-container" [nzXs]="'16'" [nzSm]="'16'" [nzMd]="'16'" [nzLg]="'16'" [nzOffset]="'4'">
+    <div nz-col class="main-container" nzSpan="16" nzOffset="4">
       <router-outlet></router-outlet>
     </div>
   </div>

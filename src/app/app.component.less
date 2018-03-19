@@ -11,9 +11,9 @@ body {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+  font-family: sans-serif;
   line-height: 1.5;
-  color: #666;
+  color: rgba(0,0,0,.65);
   font-size: 14px !important;
   background: #FFF;
   transition: background 1s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -54,7 +54,7 @@ div.main-container {
   transition: opacity 0.5s;
   background: #ffffff;
   height: @header-height;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   width: 100%;
   .ant-menu-horizontal {
     border-bottom: none;
@@ -73,29 +73,34 @@ div.main-container {
 
 #logo {
   float: left;
-  height: 80px;
-  line-height: 80px;
+  height: 64px;
+  line-height: 64px;
 }
 
 #logo img {
-  height: 80px;
+  height: 44px;
   width: 40px;
-  margin: auto 20px;
+  margin: auto 10px;
 }
 
 #logo span {
   float: right;
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Raleway', 'Hiragino Sans GB', sans-serif;
-  height: 80px;
-  line-height: 80px;
-  color: #108ee9;
+  height: 24px;
+  line-height: 24px;
+  margin-top: 20px;
+  color: rgba(0,0,0,.85);
 }
 
 #lang {
   float: right;
-  margin-top: 29px;
+  margin-right: 56px;
+  margin-top: 24px;
   margin-left: 12px;
+  height: 24px;
+  border-color: #d9d9d9;
+  color: #000;
 }
 
 footer {
@@ -112,3 +117,14 @@ footer {
   margin-bottom: 15px;
 }
 
+.ant-modal-body {
+  height: 400px;
+  overflow-y: auto;
+  pre {
+    background-color: #f6f8fa !important;
+  }
+
+  .preview h2 {
+    color: #666666;
+  }
+}
