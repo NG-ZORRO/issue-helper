@@ -4,7 +4,6 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host local.alibaba-inc.com --port=4000",
     "build": "ng build --prod --base-href /issue-helper/",
     "test": "ng test",
     "lint": "ng lint",
@@ -26,7 +25,7 @@
     "core-js": "^2.4.1",
     "highlight.js": "^9.12.0",
     "marked": "^0.3.6",
-    "ng-zorro-antd": "^0.7.0-beta.1",
+    "ng-zorro-antd": "^0.7.0-beta.2",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },

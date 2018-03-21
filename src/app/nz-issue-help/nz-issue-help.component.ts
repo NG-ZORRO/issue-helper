@@ -159,6 +159,7 @@ export class NzIssueHelpComponent implements OnInit {
         if (this.issueType === 'bug') {
             for (const i in this.validateForm.controls) {
                 this.validateForm.controls[i].markAsDirty();
+                this.validateForm.controls[i].updateValueAndValidity();
             }
             if (!this.validateForm.invalid) {
                 // 手动格式化一下MARKDOWN
@@ -198,6 +199,7 @@ ${this.getFormControl('addtion').value}
         } else {
             for (const i in this.validateFeatureForm.controls) {
                 this.validateFeatureForm.controls[i].markAsDirty();
+                this.validateFeatureForm.controls[i].updateValueAndValidity();
             }
             if (!this.validateFeatureForm.invalid) {
                 this.confirmMarkdown = `
