@@ -1,0 +1,19 @@
+<nz-layout>
+  <nz-header class="header">
+    <div class="headerContainer">
+      <div class="logo">
+        <img src="../assets/img/logo.svg">
+        <h1>Issue Helper</h1>
+      </div>
+      <div class="">
+        <button nz-button [nzSize]="'small'" nzType="default" (click)="changeLanguage()">
+          {{LANGUAGE==='zh' ? 'English' : '中文'}}
+        </button>
+      </div>
+    </div>
+  </nz-header>
+  <nz-content class="content">
+    <router-outlet></router-outlet>
+  </nz-content>
+  <nz-footer>Footer</nz-footer>
+</nz-layout>
