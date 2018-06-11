@@ -11,7 +11,8 @@ export class AppComponent {
   LANGUAGE = 'zh';
 
   constructor(private router: Router) {
-    if (window.location.pathname.indexOf('zh') === -1) {
+    console.log(window.location.hash);
+    if (window.location.hash.indexOf('zh') === -1) {
       this.LANGUAGE = 'en';
     }
   }
