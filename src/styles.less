@@ -1,3 +1,4 @@
+@import "theme";
 /* You can add global styles to this file, and also import other style files */
 body {
   margin: 0;
@@ -7,7 +8,7 @@ body {
 
 .header {
   transition: opacity .5s;
-  background: #fff;
+  background: @component-background;
 }
 
 .headerContainer {
@@ -51,7 +52,7 @@ p {
   margin: 20px auto;
   padding: 24px;
   border-radius: 4px;
-  background: #fff;
+  background: @component-background;
 }
 
 .paragraph {
@@ -84,4 +85,47 @@ p {
 
 .footer {
   text-align: center;
+}
+
+.paragraph {
+  h5 {
+    font-size: 16px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+
+    &, th, td {
+      border: 1px solid #e8e8e8;
+    }
+
+    thead {
+      th, td {
+        background: #fafafa;
+      }
+    }
+
+    th, td {
+      padding: 8px 12px;
+    }
+  }
+
+  p {
+    margin-bottom: 15px;
+  }
+
+  ul, ol {
+    padding: 0 15px 15px 15px;
+    margin-left: 15px;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
 }

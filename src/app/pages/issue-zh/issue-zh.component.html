@@ -8,10 +8,15 @@
     </p>
     <p>对于使用中遇到的问题，请使用以下资源：</p>
     <ul>
-      <li>仔细阅读 <a href="http://ng.ant.design/docs/introduce/zh" target="_blank">文档</a></li>
-      <li>在 <a href="https://stackoverflow.com/questions/ask?tags=ng-zorro-antd" target="_blank">StackOverflow</a> (英文)
+      <li>仔细阅读
+        <a href="http://ng.ant.design/docs/introduce/zh" target="_blank">文档</a>
+      </li>
+      <li>在
+        <a href="https://stackoverflow.com/questions/ask?tags=ng-zorro-antd" target="_blank">StackOverflow</a>
+        (英文)
         或是
-        <a href="https://github.com/NG-ZORRO/ng-zorro-antd/issues" target="_blank">Github</a> (issues) 搜索和提问
+        <a href="https://github.com/NG-ZORRO/ng-zorro-antd/issues" target="_blank">Github</a>
+        (issues) 搜索和提问
       </li>
     </ul>
     <p>最后，在开 issue 前，可以先搜索一下以往的旧 issue - 你遇到的问题可能已经有人提了，也可能已经在最新版本中被修正。注意：如果你发现一个已经关闭的旧 issue 在最新版本中仍然存在，请不要在旧 issue
@@ -26,8 +31,11 @@
             <nz-form-control [nzSpan]="24">
               <nz-select formControlName="repository">
                 <nz-option *ngFor="let repository of repositories" [nzLabel]="repository"
-                           [nzValue]="repository"></nz-option>
+                  [nzValue]="repository"></nz-option>
               </nz-select>
+              <nz-form-explain>
+                请确保将 issue 发往相关的仓库。
+              </nz-form-explain>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -35,12 +43,9 @@
           <nz-form-item>
             <nz-form-label nzFor="issueType">这是一个</nz-form-label>
             <nz-form-control [nzSpan]="24">
-              <nz-select [(ngModel)]="issueType" (ngModelChange)="changeType()" [ngModelOptions]="{standalone: true}">
-                <nz-option *ngFor="let feature of features"
-                           [nzLabel]="feature.label"
-                           [nzValue]="feature.value">
-                </nz-option>
-              </nz-select>
+              <nz-radio-group class="radioGroup" [(ngModel)]="issueType" (ngModelChange)="changeType()" [ngModelOptions]="{standalone: true}">
+                <label nz-radio-button *ngFor="let feature of features" [nzValue]="feature.value">{{feature.label}}</label>
+              </nz-radio-group>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -54,8 +59,8 @@
         </div>
         <div nz-col [nzSpan]="24" *ngIf="searchIssues.length>0">
           <nz-form-item>
-            <nz-form-label>Similar Issues</nz-form-label>
             <nz-form-control [nzSpan]="24">
+              <h3>Similar Issues:</h3>
               <ul>
                 <li *ngFor="let issue of searchIssues">
                   <a target="_blank" href="{{issue.html_url}}">{{issue.title}}</a>
@@ -71,7 +76,7 @@
               <nz-form-control [nzSpan]="24">
                 <nz-select formControlName="version">
                   <nz-option *ngFor="let version of versions" [nzLabel]="version"
-                             [nzValue]="version"></nz-option>
+                    [nzValue]="version"></nz-option>
                 </nz-select>
                 <nz-form-explain>
                   <span>请检查问题是否存在于最新版本中。</span>
@@ -81,28 +86,25 @@
           </div>
           <div nz-col [nzSpan]="12" [nzOffset]="1">
             <nz-form-item>
-              <nz-form-label nzRequired>重现链接</nz-form-label>
+              <nz-form-label nzRequired>浏览器</nz-form-label>
               <nz-form-control [nzSpan]="24">
-                <input nz-input formControlName="link">
-                <nz-form-explain>
-                  <p>请提供一个尽可能精简的链接
-                    <a href="https://stackblitz.com/edit/ng-zorro-antd-start?file=src%2Fapp%2Fapp.component.ts"
-                       target="_blank">stackblitz</a> 的链接。
-                    <br>
-                    <a (click)="showReprod()">什么是最小化重现，为什么这是必需的？</a>
-                  </p>
-                </nz-form-explain>
+                <input nz-input formControlName="environment">
+                <nz-form-explain>浏览器版本等信息</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzRequired>环境</nz-form-label>
+              <nz-form-label nzRequired>重现链接</nz-form-label>
               <nz-form-control [nzSpan]="24">
-                <input nz-input formControlName="environment">
-                <nz-form-explain
-                  *ngIf="issueBugForm.get('environment').dirty && issueBugForm.get('environment').errors">
-                  系统版本、浏览器版本、 ng-zorro 版本等等信息
+                <input nz-input formControlName="link">
+                <nz-form-explain>
+                  <p>请提供一个尽可能精简的链接
+                    <a href="https://stackblitz.com/edit/ng-zorro-antd-start"
+                      target="_blank">stackblitz
+                    </a>的链接。
+                    <a (click)="showReprod()">什么是最小化重现，为什么这是必需的？</a>
+                  </p>
                 </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
@@ -113,9 +115,13 @@
               <nz-form-control [nzSpan]="24">
                 <textarea nz-input formControlName="step" [nzAutosize]="{ minRows: 2 }"></textarea>
                 <nz-form-explain>
-                  <p>简洁清晰的重现步骤能够帮助我们更迅速地定位问题所在。支持使用 <a href="https://guides.github.com/features/mastering-markdown/"
-                                                       target="_blank">Markdown</a>
-                    来格式化列表或是代码片段。</p>
+                  <p>
+                    简洁清晰的重现步骤能够帮助我们更迅速地定位问题所在。支持使用
+                    <a href="https://guides.github.com/features/mastering-markdown/"
+                      target="_blank">Markdown
+                    </a>
+                    来格式化列表或是代码片段。
+                  </p>
                 </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
@@ -126,6 +132,7 @@
               <nz-form-control [nzSpan]="24">
                 <textarea nz-input formControlName="expect_result" [nzAutosize]="{ minRows: 2 }"></textarea>
               </nz-form-control>
+              <nz-form-explain *ngIf="issueBugForm.get('expect_result').dirty && issueBugForm.get('expect_result').hasError('required')">请填写期望的结果。</nz-form-explain>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
@@ -133,6 +140,7 @@
               <nz-form-label nzRequired>实际的结果是什么？</nz-form-label>
               <nz-form-control [nzSpan]="24">
                 <textarea nz-input formControlName="exist_result" [nzAutosize]="{ minRows: 2 }"></textarea>
+                <nz-form-explain *ngIf="issueBugForm.get('exist_result').dirty && issueBugForm.get('exist_result').hasError('required')">请填写实际的结果。</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -169,9 +177,12 @@
               <nz-form-control [nzSpan]="24">
                 <textarea nz-input formControlName="proposal" [nzAutosize]="{ minRows: 2 }"></textarea>
                 <nz-form-explain>
-                  <p>描述一下你期望这个新功能的 API 是如何使用的，并提供一些代码示例。请用 <a
-                    href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a>
-                    格式化你的代码片段。</p>
+                  <p>描述一下你期望这个新功能的 API 是如何使用的，并提供一些代码示例。请用
+                    <a
+                      href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown
+                    </a>
+                    格式化你的代码片段。
+                  </p>
                 </nz-form-explain>
               </nz-form-control>
             </nz-form-item>

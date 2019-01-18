@@ -3,13 +3,21 @@
     <h2>Before You Start...</h2>
     <p>The issue list is reserved exclusively for bug reports and feature requests. That means we do not accept usage
       questions. If you open an issue that does not conform to the requirements, <strong>it will be closed
-        immediately</strong>. <a (click)="showIntro()">Why are we so strict about this?</a></p>
+        immediately</strong>.
+      <a (click)="showIntro()">Why are we so strict about this?</a>
+    </p>
     <p>For usage questions, please use the following resources:</p>
     <ul>
-      <li>Read the <a href="http://ng.ant.design/docs/introduce/en" target="_blank">docs</a></li>
-      <li>Look for / ask questions on <a href="https://stackoverflow.com/questions/ask?tags=ng-zorro-antd"
-                                         target="_blank">StackOverflow</a>
-        or <a href="https://github.com/NG-ZORRO/ng-zorro-antd/issues" target="_blank">Github</a></li>
+      <li>Read the
+        <a href="http://ng.ant.design/docs/introduce/en" target="_blank">docs</a>
+      </li>
+      <li>Look for / ask questions on
+        <a href="https://stackoverflow.com/questions/ask?tags=ng-zorro-antd"
+          target="_blank">StackOverflow
+        </a>
+        or
+        <a href="https://github.com/NG-ZORRO/ng-zorro-antd/issues" target="_blank">Github</a>
+      </li>
     </ul>
     <p>Also try to search for your issue - it may have already been answered or even fixed in the development branch.
       However, if you find that an old, closed issue still persists in the latest version, you should open a new issue
@@ -24,10 +32,10 @@
             <nz-form-control [nzSpan]="24">
               <nz-select formControlName="repository">
                 <nz-option *ngFor="let repository of repositories" [nzLabel]="repository"
-                           [nzValue]="repository"></nz-option>
+                  [nzValue]="repository"></nz-option>
               </nz-select>
               <nz-form-explain>
-                <span>Check if the issue is reproducible with the latest stable version.</span>
+                Please make sure to file the issue at appropriate repo.
               </nz-form-explain>
             </nz-form-control>
           </nz-form-item>
@@ -36,12 +44,9 @@
           <nz-form-item>
             <nz-form-label nzFor="issueType">This is a</nz-form-label>
             <nz-form-control [nzSpan]="24">
-              <nz-select [(ngModel)]="issueType" (ngModelChange)="changeType()" [ngModelOptions]="{standalone: true}">
-                <nz-option *ngFor="let feature of features"
-                           [nzLabel]="feature.label"
-                           [nzValue]="feature.value">
-                </nz-option>
-              </nz-select>
+              <nz-radio-group class="radioGroup" [(ngModel)]="issueType" (ngModelChange)="changeType()" [ngModelOptions]="{standalone: true}">
+                <label nz-radio-button *ngFor="let feature of features" [nzValue]="feature.value">{{feature.label}}</label>
+              </nz-radio-group>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -55,8 +60,8 @@
         </div>
         <div nz-col [nzSpan]="24" *ngIf="searchIssues.length>0">
           <nz-form-item>
-            <nz-form-label>Similar Issues</nz-form-label>
             <nz-form-control [nzSpan]="24">
+              <h3>Similar Issues:</h3>
               <ul>
                 <li *ngFor="let issue of searchIssues">
                   <a target="_blank" href="{{issue.html_url}}">{{issue.title}}</a>
@@ -72,31 +77,34 @@
               <nz-form-control [nzSpan]="24">
                 <nz-select formControlName="version">
                   <nz-option *ngFor="let version of versions" [nzLabel]="version"
-                             [nzValue]="version"></nz-option>
+                    [nzValue]="version"></nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="12" [nzOffset]="1">
             <nz-form-item>
-              <nz-form-label nzRequired>Link to minimal reproduction</nz-form-label>
+              <nz-form-label nzRequired>Browser</nz-form-label>
               <nz-form-control [nzSpan]="24">
-                <input nz-input formControlName="link">
-                <nz-form-explain>
-                  <p>Please provide a link by forking these links
-                    <a href="https://stackblitz.com/edit/ng-zorro-antd-start?file=src%2Fapp%2Fapp.component.ts"
-                       target="_blank">stackblitz</a>.
-                    <br>
-                    <a (click)="showReprod()">What is a minimal reproduction, and why is it required?</a></p>
-                </nz-form-explain>
+                <input nz-input formControlName="environment">
+                <nz-form-explain>Browser version...</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzRequired>Environment</nz-form-label>
+              <nz-form-label nzRequired>Link to minimal reproduction</nz-form-label>
               <nz-form-control [nzSpan]="24">
-                <input nz-input formControlName="environment">
+                <input nz-input formControlName="link">
+                <nz-form-explain>
+                  <p>Please provide a link by forking the link
+                    <a href="https://stackblitz.com/edit/ng-zorro-antd-start"
+                      target="_blank">stackblitz
+                    </a>
+                    .
+                    <a (click)="showReprod()">What is a minimal reproduction, and why is it required?</a>
+                  </p>
+                </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -108,8 +116,10 @@
                 <nz-form-explain>
                   <p>Clear and concise reproduction instructions are important for us to be
                     able to triage your issue in a timely manner. Note that you can use
-                    <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a> to
-                    format lists and code.</p>
+                    <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a>
+                    to
+                    format lists and code.
+                  </p>
                 </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
@@ -119,6 +129,7 @@
               <nz-form-label nzRequired>What is expected?</nz-form-label>
               <nz-form-control [nzSpan]="24">
                 <textarea nz-input formControlName="expect_result" [nzAutosize]="{ minRows: 2 }"></textarea>
+                <nz-form-explain *ngIf="issueBugForm.get('expect_result').dirty && issueBugForm.get('expect_result').hasError('required')">expected is required.</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -127,6 +138,7 @@
               <nz-form-label nzRequired>What is actually happening?</nz-form-label>
               <nz-form-control [nzSpan]="24">
                 <textarea nz-input formControlName="exist_result" [nzAutosize]="{ minRows: 2 }"></textarea>
+                <nz-form-explain *ngIf="issueBugForm.get('exist_result').dirty && issueBugForm.get('exist_result').hasError('required')">actual is required.</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -168,9 +180,13 @@
                 <textarea nz-input formControlName="proposal" [nzAutosize]="{ minRows: 2 }"></textarea>
                 <nz-form-explain>
                   <p>Describe how you propose to solve the problem and provide code samples of how the API would work
-                    once implemented. Note that you can use <a
-                      href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a> to
-                    format your code blocks.</p>
+                    once implemented. Note that you can use
+                    <a
+                      href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown
+                    </a>
+                    to
+                    format your code blocks.
+                  </p>
                 </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
@@ -179,7 +195,7 @@
         <div nz-col [nzSpan]="12" [nzOffset]="11">
           <nz-form-item>
             <nz-form-control>
-              <button nz-button [nzSize]="'large'" nzType="primary" (click)="submitFormPreview()">Preview</button>
+              <button class="ant-btn-two-chinese-chars" nz-button [nzSize]="'large'" nzType="primary" (click)="submitFormPreview()">Preview</button>
             </nz-form-control>
           </nz-form-item>
         </div>

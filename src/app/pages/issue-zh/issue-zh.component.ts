@@ -40,7 +40,7 @@ export class IssueZhComponent implements OnInit, OnDestroy {
     // 匹配预定复现网址
     const REP_LINK_REGEXP = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]*(stackblitz|github)[-A-Za-z0-9+&@#/%?=~_|!:,.;]+/;
     // 现有网址不可完全复制
-    const REP_LINKS = 'https://stackblitz.com/edit/ng-zorro-antd-start?file=src%2Fapp%2Fapp.component.ts';
+    const REP_LINKS = 'https://stackblitz.com/edit/ng-zorro-antd-start';
     if (!control.value) {
       return { error: true, required: true };
     } else if (!REP_LINK_REGEXP.test(control.value) || REP_LINKS.indexOf(control.value) !== -1) {
@@ -105,29 +105,34 @@ export class IssueZhComponent implements OnInit, OnDestroy {
       switch (this.issueType) {
         case 'bug':
           this.confirmMarkdown = `
-## Version
-${this.getFormControl('version').value}
-## Environment
-${this.getFormControl('environment').value}
-## Reproduction link
+### Reproduction link
 [${this.getFormControl('link').value}](${this.getFormControl('link').value})
-## Steps to reproduce
+
+### Steps to reproduce
 ${this.getFormControl('step').value}
-## What is expected?
+
+### What is expected?
 ${this.getFormControl('expect_result').value}
-## What is actually happening?
+
+### What is actually happening?
 ${this.getFormControl('exist_result').value}
-## Other?
-${this.getFormControl('addtion').value}
-`;
+
+| Environment | Info |
+|---|---|
+| ng-zorro-antd | ${this.getFormControl('version').value} |
+| Browser | ${this.getFormControl('environment').value} |
+
+${this.getFormControl('addtion').value ? `---\n${this.getFormControl('addtion').value}` : ''}
+`.trim();
           break;
         case 'feature':
           this.confirmMarkdown = `
 ## What problem does this feature solve?
 ${this.getFormControl('motivation').value}
+
 ## What does the proposed API look like?
 ${this.getFormControl('proposal').value}
-`;
+`.trim();
           break;
       }
       this.modalService.create({
@@ -171,7 +176,7 @@ ${this.getFormControl('proposal').value}
   showIntro() {
     this.modalService.create({
       nzTitle       : '为什么要有这么严格的 issue 规定',
-      nzMaskClosable: false,
+      nzMaskClosable: true,
       nzFooter      : null,
       nzWidth       : 680,
       nzContent     : ModalIntroZhComponent
@@ -184,7 +189,7 @@ ${this.getFormControl('proposal').value}
   showReprod() {
     this.modalService.create({
       nzTitle          : '关于重现',
-      nzMaskClosable   : false,
+      nzMaskClosable   : true,
       nzFooter         : null,
       nzWidth          : 680,
       nzContent        : ModalReproductionComponent,
