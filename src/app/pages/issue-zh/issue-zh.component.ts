@@ -40,10 +40,10 @@ export class IssueZhComponent implements OnInit, OnDestroy {
     // 匹配预定复现网址
     const REP_LINK_REGEXP = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]*(stackblitz|github)[-A-Za-z0-9+&@#/%?=~_|!:,.;]+/;
     // 现有网址不可完全复制
-    const REP_LINKS = 'https://stackblitz.com/edit/ng-zorro-antd-start';
+    const preventRegexp = /^(https?:\/\/)?((stackblitz\.com\/edit\/ng-zorro-antd-start)|(ng-zorro-antd-start\.stackblitz\.io))\/?$/i;
     if (!control.value) {
       return { error: true, required: true };
-    } else if (!REP_LINK_REGEXP.test(control.value) || REP_LINKS.indexOf(control.value) !== -1) {
+    } else if (!REP_LINK_REGEXP.test(control.value) || preventRegexp.test(control.value)) {
       return { error: true, repLink: true };
     }
     return null;
