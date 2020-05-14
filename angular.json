@@ -10,13 +10,14 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "less"
+          "style": "less"
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/issue-helper",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -27,7 +28,6 @@
               "src/assets"
             ],
             "styles": [
-              "src/theme.less",
               "src/styles.less",
               "node_modules/prismjs/themes/prism-okaidia.css"
             ],
@@ -38,6 +38,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -81,7 +87,6 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/theme.less",
               "src/styles.less"
             ],
             "scripts": [],

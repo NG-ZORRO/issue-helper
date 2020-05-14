@@ -7,6 +7,7 @@ import { GithubService } from '../../services/github.service';
 import { ModalIntroZhComponent } from '../modal-intro-zh/modal-intro-zh.component';
 import { ModalPreviewComponent } from '../modal-preview/modal-preview.component';
 import { ModalReproductionComponent } from '../modal-reproduction/modal-reproduction.component';
+import {getBugTemplate, getFeatureTemplate} from '../../issue-template';
 
 @Component({
   selector   : 'app-issue-zh',
@@ -105,35 +106,10 @@ export class IssueZhComponent implements OnInit, OnDestroy {
     if (canPreview) {
       switch (this.issueType) {
         case 'bug':
-          this.confirmMarkdown = `
-### Reproduction link
-[${this.getFormControl('link').value}](${this.getFormControl('link').value})
-
-### Steps to reproduce
-${this.getFormControl('step').value}
-
-### What is expected?
-${this.getFormControl('expect_result').value}
-
-### What is actually happening?
-${this.getFormControl('exist_result').value}
-
-| Environment | Info |
-|---|---|
-| ng-zorro-antd | ${this.getFormControl('version').value} |
-| Browser | ${this.getFormControl('environment').value} |
-
-${this.getFormControl('addtion').value ? `---\n${this.getFormControl('addtion').value}` : ''}
-`.trim();
+          this.confirmMarkdown = getBugTemplate(this.issueBugForm.value);
           break;
         case 'feature':
-          this.confirmMarkdown = `
-## What problem does this feature solve?
-${this.getFormControl('motivation').value}
-
-## What does the proposed API look like?
-${this.getFormControl('proposal').value}
-`.trim();
+          this.confirmMarkdown = getFeatureTemplate(this.issueFeatureForm.value);
           break;
       }
       this.modalService.create({

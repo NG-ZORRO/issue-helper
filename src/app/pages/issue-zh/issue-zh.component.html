@@ -27,15 +27,15 @@
       <div nz-row>
         <div nz-col [nzSpan]="11">
           <nz-form-item>
-            <nz-form-label>相关仓库</nz-form-label>
+            <nz-form-label>
+              相关仓库
+              <i nz-icon nzType="question-circle-o" nz-tooltip="请确保将 issue 发往相关的仓库"></i>
+            </nz-form-label>
             <nz-form-control [nzSpan]="24">
               <nz-select formControlName="repository">
                 <nz-option *ngFor="let repository of repositories" [nzLabel]="repository"
                   [nzValue]="repository"></nz-option>
               </nz-select>
-              <nz-form-explain>
-                请确保将 issue 发往相关的仓库。
-              </nz-form-explain>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -52,7 +52,7 @@
         <div nz-col [nzSpan]="24">
           <nz-form-item>
             <nz-form-label nzRequired>Issue 标题</nz-form-label>
-            <nz-form-control [nzSpan]="24">
+            <nz-form-control [nzSpan]="24" nzErrorTip="请填写标题。">
               <input nz-input formControlName="issue_title" (ngModelChange)="searchOnChange($event)">
             </nz-form-control>
           </nz-form-item>
@@ -72,86 +72,86 @@
         <ng-container *ngIf="issueType=='bug'">
           <div nz-col [nzSpan]="11">
             <nz-form-item>
-              <nz-form-label>版本</nz-form-label>
+              <nz-form-label>
+                版本
+                <i nz-icon nzType="question-circle-o" nz-tooltip="请检查问题是否存在于最新版本中"></i>
+              </nz-form-label>
               <nz-form-control [nzSpan]="24">
                 <nz-select formControlName="version">
                   <nz-option *ngFor="let version of versions" [nzLabel]="version"
                     [nzValue]="version"></nz-option>
                 </nz-select>
-                <nz-form-explain>
-                  <span>请检查问题是否存在于最新版本中。</span>
-                </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="12" [nzOffset]="1">
             <nz-form-item>
-              <nz-form-label nzRequired>浏览器</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-label nzRequired>
+                浏览器
+                <i nz-icon nzType="question-circle-o" nz-tooltip="浏览器版本等信息"></i>
+              </nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="请填写浏览器版本。">
                 <input nz-input formControlName="environment">
-                <nz-form-explain>浏览器版本等信息</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzRequired>重现链接</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-label nzRequired>
+                重现链接
+              </nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="请填写 stackblitz 或者 github 链接。">
                 <input nz-input formControlName="link">
-                <nz-form-explain>
-                  <p>请提供一个尽可能精简的链接
-                    <a href="https://stackblitz.com/edit/ng-zorro-antd-start"
-                      target="_blank">stackblitz
-                    </a>的链接。
-                    <a (click)="showReprod()">什么是最小化重现，为什么这是必需的？</a>
-                  </p>
-                </nz-form-explain>
               </nz-form-control>
+              <p>请提供一个尽可能精简的链接
+                <a href="https://stackblitz.com/edit/ng-zorro-antd-start"
+                   target="_blank">stackblitz
+                </a>的链接。
+                <a (click)="showReprod()">什么是最小化重现，为什么这是必需的？</a>
+              </p>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzRequired>重现步骤</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-label nzRequired>
+                重现步骤
+              </nz-form-label>
+              <nz-form-control [nzSpan]="24" [nzErrorTip]="'请填写重现步骤。'">
                 <textarea nz-input formControlName="step" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain>
-                  <p>
-                    简洁清晰的重现步骤能够帮助我们更迅速地定位问题所在。支持使用
-                    <a href="https://guides.github.com/features/mastering-markdown/"
-                      target="_blank">Markdown
-                    </a>
-                    来格式化列表或是代码片段。
-                  </p>
-                </nz-form-explain>
               </nz-form-control>
+              <p>
+                简洁清晰的重现步骤能够帮助我们更迅速地定位问题所在。支持使用
+                <a href="https://guides.github.com/features/mastering-markdown/"
+                   target="_blank">Markdown
+                </a>
+                来格式化列表或是代码片段。
+              </p>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
               <nz-form-label nzRequired>期望的结果是什么？</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-control [nzSpan]="24" nzErrorTip="请填写期望的结果。">
                 <textarea nz-input formControlName="expect_result" [nzAutosize]="{ minRows: 2 }"></textarea>
               </nz-form-control>
-              <nz-form-explain *ngIf="issueBugForm.get('expect_result').dirty && issueBugForm.get('expect_result').hasError('required')">请填写期望的结果。</nz-form-explain>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
               <nz-form-label nzRequired>实际的结果是什么？</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-control [nzSpan]="24" nzErrorTip="请填写实际的结果。">
                 <textarea nz-input formControlName="exist_result" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain *ngIf="issueBugForm.get('exist_result').dirty && issueBugForm.get('exist_result').hasError('required')">请填写实际的结果。</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label>补充说明（可选）</nz-form-label>
+              <nz-form-label>
+                补充说明（可选）
+                <i nz-icon nzType="question-circle-o" [nz-tooltip]="'比如：遇到这个 bug 的业务场景、上下文。'"></i>
+              </nz-form-label>
               <nz-form-control [nzSpan]="24">
                 <textarea nz-input formControlName="addtion" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain>
-                  <span>比如：遇到这个 bug 的业务场景、上下文。</span>
-                </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -160,31 +160,31 @@
         <ng-container *ngIf="issueType=='feature'">
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzRequired>这个功能解决了什么问题？</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-label nzRequired>
+                这个功能解决了什么问题？
+              </nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="请填写此项。">
                 <textarea nz-input formControlName="motivation" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain>
-                  <p class="explain-paragraph">请尽可能详尽地说明这个需求的用例和场景。最重要的是：解释清楚是怎样的<strong>用户体验需求</strong>催生了这个功能上的需求。
-                  </p>
-                  <p>NG-ZORRO的一个重要设计原则是保持 API 的简洁和直接。通常来说，我们只考虑添加在现有的 API 下无法轻松实现的功能。新功能的用例应当足够常见。</p>
-                </nz-form-explain>
               </nz-form-control>
+              <p class="explain-paragraph">请尽可能详尽地说明这个需求的用例和场景。最重要的是：解释清楚是怎样的<strong>用户体验需求</strong>催生了这个功能上的需求。
+              </p>
+              <p>NG-ZORRO的一个重要设计原则是保持 API 的简洁和直接。通常来说，我们只考虑添加在现有的 API 下无法轻松实现的功能。新功能的用例应当足够常见。</p>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzRequired>你期望的 API 是怎样的？</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-label nzRequired>
+                你期望的 API 是怎样的？
+              </nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="请填写此项。">
                 <textarea nz-input formControlName="proposal" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain>
-                  <p>描述一下你期望这个新功能的 API 是如何使用的，并提供一些代码示例。请用
-                    <a
-                      href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown
-                    </a>
-                    格式化你的代码片段。
-                  </p>
-                </nz-form-explain>
               </nz-form-control>
+              <p>描述一下你期望这个新功能的 API 是如何使用的，并提供一些代码示例。请用
+                <a
+                  href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown
+                </a>
+                格式化你的代码片段。
+              </p>
             </nz-form-item>
           </div>
         </ng-container>

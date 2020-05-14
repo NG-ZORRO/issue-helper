@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./src",
+    "module": "esnext",
     "paths": {
       "services": [
         "app/services"

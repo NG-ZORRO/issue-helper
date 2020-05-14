@@ -28,15 +28,15 @@
       <div nz-row>
         <div nz-col [nzSpan]="11">
           <nz-form-item>
-            <nz-form-label>I am opening an issue for</nz-form-label>
+            <nz-form-label>
+              I am opening an issue for
+              <i nz-icon nzType="question-circle-o" nz-tooltip="Please make sure to file the issue at appropriate repo."></i>
+            </nz-form-label>
             <nz-form-control [nzSpan]="24">
               <nz-select formControlName="repository">
                 <nz-option *ngFor="let repository of repositories" [nzLabel]="repository"
                   [nzValue]="repository"></nz-option>
               </nz-select>
-              <nz-form-explain>
-                Please make sure to file the issue at appropriate repo.
-              </nz-form-explain>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -53,7 +53,7 @@
         <div nz-col [nzSpan]="24">
           <nz-form-item>
             <nz-form-label nzRequired>Title</nz-form-label>
-            <nz-form-control [nzSpan]="24">
+            <nz-form-control [nzSpan]="24" nzErrorTip="Title is required.">
               <input nz-input formControlName="issue_title" (ngModelChange)="searchOnChange($event)">
             </nz-form-control>
           </nz-form-item>
@@ -73,7 +73,10 @@
         <ng-container *ngIf="issueType=='bug'">
           <div nz-col [nzSpan]="11">
             <nz-form-item>
-              <nz-form-label>Version</nz-form-label>
+              <nz-form-label>
+                Version
+                <i nz-icon nzType="question-circle-o" nz-tooltip="Please check if the problem exists in the latest version."></i>
+              </nz-form-label>
               <nz-form-control [nzSpan]="24">
                 <nz-select formControlName="version">
                   <nz-option *ngFor="let version of versions" [nzLabel]="version"
@@ -85,71 +88,67 @@
           <div nz-col [nzSpan]="12" [nzOffset]="1">
             <nz-form-item>
               <nz-form-label nzRequired>Browser</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-control [nzSpan]="24" nzErrorTip="Browser information is required.">
                 <input nz-input formControlName="environment">
-                <nz-form-explain>Browser version...</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzRequired>Link to minimal reproduction</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-label nzRequired>
+                Link to minimal reproduction
+              </nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="A stackblitz or github link is required.">
                 <input nz-input formControlName="link">
-                <nz-form-explain>
-                  <p>Please provide a link by forking the link
-                    <a href="https://stackblitz.com/edit/ng-zorro-antd-start"
-                      target="_blank">stackblitz
-                    </a>
-                    .
-                    <a (click)="showReprod()">What is a minimal reproduction, and why is it required?</a>
-                  </p>
-                </nz-form-explain>
               </nz-form-control>
+              <p>Please provide a link by forking the link
+                <a href="https://stackblitz.com/edit/ng-zorro-antd-start"
+                   target="_blank">stackblitz
+                </a>
+                .
+                <a (click)="showReprod()">What is a minimal reproduction, and why is it required?</a>
+              </p>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzRequired>Step to reproduce</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-label nzRequired>
+                Step to reproduce
+              </nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="Reproduce step is required.">
                 <textarea nz-input formControlName="step" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain>
-                  <p>Clear and concise reproduction instructions are important for us to be
-                    able to triage your issue in a timely manner. Note that you can use
-                    <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a>
-                    to
-                    format lists and code.
-                  </p>
-                </nz-form-explain>
               </nz-form-control>
+              <p>Clear and concise reproduction instructions are important for us to be
+                able to triage your issue in a timely manner. Note that you can use
+                <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a>
+                to
+                format lists and code.
+              </p>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
               <nz-form-label nzRequired>What is expected?</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-control [nzSpan]="24" nzErrorTip="Expected is required.">
                 <textarea nz-input formControlName="expect_result" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain *ngIf="issueBugForm.get('expect_result').dirty && issueBugForm.get('expect_result').hasError('required')">expected is required.</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
               <nz-form-label nzRequired>What is actually happening?</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-control [nzSpan]="24" nzErrorTip="Actual is required.">
                 <textarea nz-input formControlName="exist_result" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain *ngIf="issueBugForm.get('exist_result').dirty && issueBugForm.get('exist_result').hasError('required')">actual is required.</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label>Any additional comments? (optional)</nz-form-label>
+              <nz-form-label>
+                Any additional comments? (optional)
+                <i nz-icon nzType="question-circle-o" [nz-tooltip]="'e.g. some background/context of how you ran into this bug.'"></i></nz-form-label>
               <nz-form-control [nzSpan]="24">
                 <textarea nz-input formControlName="addtion" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain>
-                  <span>e.g. some background/context of how you ran into this bug.</span>
-                </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -158,37 +157,37 @@
         <ng-container *ngIf="issueType=='feature'">
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzRequired>What problem does this feature solve?</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-label nzRequired>
+                What problem does this feature solve?
+              </nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="This is required.">
                 <textarea nz-input formControlName="motivation" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain>
-                  <p class="explain-paragraph">Explain your use case, context, and rationale behind this feature
-                    request. More importantly, what is the <strong>end user experience</strong> you are trying to build
-                    that led to the need for this feature?</p>
-                  <p>An important design goal of Ant Design is keeping the API surface small and straightforward. In
-                    general, we only consider adding new features that solve a problem that cannot be easily dealt with
-                    using existing APIs (i.e. not just an alternative way of doing things that can already be done). The
-                    problem should also be common enough to justify the addition.</p>
-                </nz-form-explain>
               </nz-form-control>
+              <p class="explain-paragraph">Explain your use case, context, and rationale behind this feature
+                request. More importantly, what is the <strong>end user experience</strong> you are trying to build
+                that led to the need for this feature?</p>
+              <p>An important design goal of Ant Design is keeping the API surface small and straightforward. In
+                general, we only consider adding new features that solve a problem that cannot be easily dealt with
+                using existing APIs (i.e. not just an alternative way of doing things that can already be done). The
+                problem should also be common enough to justify the addition.</p>
             </nz-form-item>
           </div>
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzRequired>What does the proposed API look like?</nz-form-label>
-              <nz-form-control [nzSpan]="24">
+              <nz-form-label nzRequired>
+                What does the proposed API look like?
+              </nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="This is required.">
                 <textarea nz-input formControlName="proposal" [nzAutosize]="{ minRows: 2 }"></textarea>
-                <nz-form-explain>
-                  <p>Describe how you propose to solve the problem and provide code samples of how the API would work
-                    once implemented. Note that you can use
-                    <a
-                      href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown
-                    </a>
-                    to
-                    format your code blocks.
-                  </p>
-                </nz-form-explain>
               </nz-form-control>
+              <p>Describe how you propose to solve the problem and provide code samples of how the API would work
+                once implemented. Note that you can use
+                <a
+                  href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown
+                </a>
+                to
+                format your code blocks.
+              </p>
             </nz-form-item>
           </div>
         </ng-container>
