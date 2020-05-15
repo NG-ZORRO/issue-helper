@@ -100,13 +100,18 @@
               <nz-form-label nzRequired>
                 重现链接
               </nz-form-label>
-              <nz-form-control [nzSpan]="24" nzErrorTip="请填写 stackblitz 或者 github 链接。">
+              <nz-form-control [nzSpan]="24" nzErrorTip="请填写 stackblitz、codesandbox 或者 github 链接。">
                 <input nz-input formControlName="link">
               </nz-form-control>
               <p>请提供一个尽可能精简的链接
-                <a href="https://stackblitz.com/edit/ng-zorro-antd-start"
+                <a href="https://stackblitz.com/edit/ng-zorro-antd-ivy"
                    target="_blank">stackblitz
-                </a>的链接。
+                </a>
+                或者
+                <a href="https://codesandbox.io/s/ng-zorro-antd-ivy-mp18k"
+                   target="_blank">codesandbox
+                </a>
+                的链接。
                 <a (click)="showReprod()">什么是最小化重现，为什么这是必需的？</a>
               </p>
             </nz-form-item>

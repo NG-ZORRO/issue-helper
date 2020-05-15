@@ -7,7 +7,7 @@ import { GithubService } from '../../services/github.service';
 import { ModalIntroEnComponent } from '../modal-intro-en/modal-intro-en.component';
 import { ModalPreviewComponent } from '../modal-preview/modal-preview.component';
 import { ModalReproductionComponent } from '../modal-reproduction/modal-reproduction.component';
-import {getBugTemplate, getFeatureTemplate} from '../../issue-template';
+import { getBugTemplate, getFeatureTemplate, PREVENT_COPY_LINK, REP_LINK_REGEXP } from '../../util';
 
 @Component({
   selector   : 'app-issue-en',
@@ -38,13 +38,9 @@ export class IssueEnComponent implements OnInit, OnDestroy {
   searchIssues = [];
 
   replinkValidator = (control: FormControl): { [s: string]: boolean } => {
-    // 匹配预定复现网址
-    const REP_LINK_REGEXP = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]*(stackblitz|github)[-A-Za-z0-9+&@#/%?=~_|!:,.;]+/;
-    // 现有网址不可完全复制
-    const preventRegexp = /^(https?:\/\/)?((stackblitz\.com\/edit\/ng-zorro-antd-start)|(ng-zorro-antd-start\.stackblitz\.io))\/?$/i;
     if (!control.value) {
       return { error: true, required: true };
-    } else if (!REP_LINK_REGEXP.test(control.value) || preventRegexp.test(control.value)) {
+    } else if (!REP_LINK_REGEXP.test(control.value) || PREVENT_COPY_LINK.test(control.value)) {
       return { error: true, repLink: true };
     }
     return null;

@@ -98,12 +98,16 @@
               <nz-form-label nzRequired>
                 Link to minimal reproduction
               </nz-form-label>
-              <nz-form-control [nzSpan]="24" nzErrorTip="A stackblitz or github link is required.">
+              <nz-form-control [nzSpan]="24" nzErrorTip="A stackblitz, codesandbox or github link is required.">
                 <input nz-input formControlName="link">
               </nz-form-control>
               <p>Please provide a link by forking the link
-                <a href="https://stackblitz.com/edit/ng-zorro-antd-start"
+                <a href="https://stackblitz.com/edit/ng-zorro-antd-ivy"
                    target="_blank">stackblitz
+                </a>
+                or
+                <a href="https://codesandbox.io/s/ng-zorro-antd-ivy-mp18k"
+                   target="_blank">codesandbox
                 </a>
                 .
                 <a (click)="showReprod()">What is a minimal reproduction, and why is it required?</a>
