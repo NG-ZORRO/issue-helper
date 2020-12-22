@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
 import { MarkdownModule } from 'ngx-markdown';
 import { AppRouting } from './app-routing';
 
@@ -17,11 +17,21 @@ import { ModalIntroZhComponent } from './pages/modal-intro-zh/modal-intro-zh.com
 import { ModalPreviewComponent } from './pages/modal-preview/modal-preview.component';
 import { GithubService } from './services/github.service';
 import { ModalReproductionComponent } from './pages/modal-reproduction/modal-reproduction.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 registerLocaleData(zh);
 
 @NgModule({
-  declarations   : [
+  declarations: [
     AppComponent,
     IssueZhComponent,
     IssueEnComponent,
@@ -30,7 +40,7 @@ registerLocaleData(zh);
     ModalPreviewComponent,
     ModalReproductionComponent
   ],
-  imports        : [
+  imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -38,16 +48,18 @@ registerLocaleData(zh);
     HttpClientModule,
     AppRouting,
     MarkdownModule.forRoot(),
-    NgZorroAntdModule
+    NzModalModule,
+    NzLayoutModule,
+    NzSelectModule,
+    NzGridModule,
+    NzIconModule,
+    NzFormModule,
+    NzRadioModule,
+    NzInputModule,
+    NzButtonModule,
+    NzToolTipModule
   ],
-  entryComponents: [
-    ModalIntroZhComponent,
-    ModalIntroEnComponent,
-    ModalPreviewComponent,
-    ModalReproductionComponent
-  ],
-  providers      : [ GithubService, { provide: NZ_I18N, useValue: zh_CN } ],
-  bootstrap      : [ AppComponent ]
+  providers: [GithubService, { provide: NZ_I18N, useValue: zh_CN }],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

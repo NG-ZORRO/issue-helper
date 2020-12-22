@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd';
-import { Subject, Subscription } from 'rxjs/index';
-import { debounceTime, distinctUntilChanged } from 'rxjs/internal/operators';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { GithubService } from '../../services/github.service';
 import { ModalIntroEnComponent } from '../modal-intro-en/modal-intro-en.component';
 import { ModalPreviewComponent } from '../modal-preview/modal-preview.component';

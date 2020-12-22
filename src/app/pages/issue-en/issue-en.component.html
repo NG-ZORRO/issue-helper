@@ -30,7 +30,7 @@
           <nz-form-item>
             <nz-form-label>
               I am opening an issue for
-              <i nz-icon nzType="question-circle-o" nz-tooltip="Please make sure to file the issue at appropriate repo."></i>
+              <i nz-icon nzType="question-circle-o" nz-tooltip nzTooltipTitle="Please make sure to file the issue at appropriate repo."></i>
             </nz-form-label>
             <nz-form-control [nzSpan]="24">
               <nz-select formControlName="repository">
@@ -75,7 +75,7 @@
             <nz-form-item>
               <nz-form-label>
                 Version
-                <i nz-icon nzType="question-circle-o" nz-tooltip="Please check if the problem exists in the latest version."></i>
+                <i nz-icon nzType="question-circle-o" nz-tooltip nzTooltipTitle="Please check if the problem exists in the latest version."></i>
               </nz-form-label>
               <nz-form-control [nzSpan]="24">
                 <nz-select formControlName="version">
@@ -120,7 +120,7 @@
                 Step to reproduce
               </nz-form-label>
               <nz-form-control [nzSpan]="24" nzErrorTip="Reproduce step is required.">
-                <textarea nz-input formControlName="step" [nzAutosize]="{ minRows: 2 }"></textarea>
+                <textarea rows="2" nz-input formControlName="step" [nzAutosize]="{ minRows: 2 }"></textarea>
               </nz-form-control>
               <p>Clear and concise reproduction instructions are important for us to be
                 able to triage your issue in a timely manner. Note that you can use
@@ -134,7 +134,7 @@
             <nz-form-item>
               <nz-form-label nzRequired>What is expected?</nz-form-label>
               <nz-form-control [nzSpan]="24" nzErrorTip="Expected is required.">
-                <textarea nz-input formControlName="expect_result" [nzAutosize]="{ minRows: 2 }"></textarea>
+                <textarea rows="2" nz-input formControlName="expect_result" [nzAutosize]="{ minRows: 2 }"></textarea>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -142,7 +142,7 @@
             <nz-form-item>
               <nz-form-label nzRequired>What is actually happening?</nz-form-label>
               <nz-form-control [nzSpan]="24" nzErrorTip="Actual is required.">
-                <textarea nz-input formControlName="exist_result" [nzAutosize]="{ minRows: 2 }"></textarea>
+                <textarea rows="2" nz-input formControlName="exist_result" [nzAutosize]="{ minRows: 2 }"></textarea>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -150,9 +150,9 @@
             <nz-form-item>
               <nz-form-label>
                 Any additional comments? (optional)
-                <i nz-icon nzType="question-circle-o" [nz-tooltip]="'e.g. some background/context of how you ran into this bug.'"></i></nz-form-label>
+                <i nz-icon nzType="question-circle-o" nz-tooltip [nzTooltipTitle]="'e.g. some background/context of how you ran into this bug.'"></i></nz-form-label>
               <nz-form-control [nzSpan]="24">
-                <textarea nz-input formControlName="addtion" [nzAutosize]="{ minRows: 2 }"></textarea>
+                <textarea rows="2" nz-input formControlName="addtion" [nzAutosize]="{ minRows: 2 }"></textarea>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -165,7 +165,7 @@
                 What problem does this feature solve?
               </nz-form-label>
               <nz-form-control [nzSpan]="24" nzErrorTip="This is required.">
-                <textarea nz-input formControlName="motivation" [nzAutosize]="{ minRows: 2 }"></textarea>
+                <textarea rows="2" nz-input formControlName="motivation" [nzAutosize]="{ minRows: 2 }"></textarea>
               </nz-form-control>
               <p class="explain-paragraph">Explain your use case, context, and rationale behind this feature
                 request. More importantly, what is the <strong>end user experience</strong> you are trying to build
@@ -182,7 +182,7 @@
                 What does the proposed API look like?
               </nz-form-label>
               <nz-form-control [nzSpan]="24" nzErrorTip="This is required.">
-                <textarea nz-input formControlName="proposal" [nzAutosize]="{ minRows: 2 }"></textarea>
+                <textarea rows="2" nz-input formControlName="proposal" [nzAutosize]="{ minRows: 2 }"></textarea>
               </nz-form-control>
               <p>Describe how you propose to solve the problem and provide code samples of how the API would work
                 once implemented. Note that you can use
