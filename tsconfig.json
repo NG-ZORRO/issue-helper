@@ -2,11 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./src",
-    "paths": {
-      "services": [
-        "app/services"
-      ]
-    },
+    "paths": {},
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": false,
@@ -16,7 +12,7 @@
     "noFallthroughCasesInSwitch": false,
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,

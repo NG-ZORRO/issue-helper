@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 
 @Component({
@@ -7,14 +7,12 @@ import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
   styleUrls: ['./modal-reproduction.component.less']
 })
 export class ModalReproductionComponent implements OnInit {
-
-  readonly nzModalData: { language?: string } = inject(NZ_MODAL_DATA, { optional: true }) || {};
   
   get language(): string {
-    return this.nzModalData.language || 'zh';
+    return this.nzModalData?.language || 'zh';
   }
 
-  constructor() { }
+  constructor(@Optional() @Inject(NZ_MODAL_DATA) private nzModalData: { language?: string } | null) { }
 
   ngOnInit() {
   }
