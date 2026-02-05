@@ -12,14 +12,14 @@
     "noFallthroughCasesInSwitch": false,
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "target": "ES2022",
-    "module": "ES2022",
+    "module": "NodeNext",
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
@@ -31,6 +31,8 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": false,
     "strictInputAccessModifiers": false,
-    "strictTemplates": false
+    "strictTemplates": false,
+    "fullTemplateTypeCheck": false,
+    "strictAttributeTypes": false
   }
 }

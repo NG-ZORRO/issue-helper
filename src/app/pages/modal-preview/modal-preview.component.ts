@@ -4,7 +4,8 @@ import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 @Component({
   selector   : 'app-modal-preview',
   templateUrl: './modal-preview.component.html',
-  styleUrls  : [ './modal-preview.component.less' ]
+  styleUrls  : [ './modal-preview.component.less' ],
+  standalone: false
 })
 export class ModalPreviewComponent implements OnInit {
   

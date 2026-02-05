@@ -4,7 +4,8 @@ import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-modal-reproduction',
   templateUrl: './modal-reproduction.component.html',
-  styleUrls: ['./modal-reproduction.component.less']
+  styleUrls: ['./modal-reproduction.component.less'],
+  standalone: false
 })
 export class ModalReproductionComponent implements OnInit {
   

@@ -12,7 +12,8 @@ import { getBugTemplate, getFeatureTemplate, PREVENT_COPY_LINK, REP_LINK_REGEXP 
 @Component({
   selector   : 'app-issue-en',
   templateUrl: './issue-en.component.html',
-  styleUrls  : [ './issue-en.component.less' ]
+  styleUrls  : [ './issue-en.component.less' ],
+  standalone: false
 })
 export class IssueEnComponent implements OnInit, OnDestroy {
   searchSubject$ = new Subject<string>();
