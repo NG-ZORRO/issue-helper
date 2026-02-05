@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 
 @Component({
   selector   : 'app-modal-preview',
@@ -7,7 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ModalPreviewComponent implements OnInit {
 
-  @Input() previewData;
+  readonly nzModalData: { previewData?: string } = inject(NZ_MODAL_DATA, { optional: true }) || {};
+  
+  get previewData(): string {
+    return this.nzModalData.previewData || '';
+  }
 
   constructor() {
   }

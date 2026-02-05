@@ -15,10 +15,10 @@ import { getBugTemplate, getFeatureTemplate, PREVENT_COPY_LINK, REP_LINK_REGEXP 
   styleUrls  : [ './issue-en.component.less' ]
 })
 export class IssueEnComponent implements OnInit, OnDestroy {
-  searchSubject$ = new Subject();
-  searchSubjection: Subscription;
-  issueBugForm: FormGroup;
-  issueFeatureForm: FormGroup;
+  searchSubject$ = new Subject<string>();
+  searchSubjection: Subscription | null = null;
+  issueBugForm!: FormGroup;
+  issueFeatureForm!: FormGroup;
   issueType = 'bug';
   confirmMarkdown = '';
 
@@ -34,10 +34,10 @@ export class IssueEnComponent implements OnInit, OnDestroy {
     }
   ];
 
-  versions = [];
-  searchIssues = [];
+  versions: string[] = [];
+  searchIssues: any[] = [];
 
-  replinkValidator = (control: FormControl): { [s: string]: boolean } => {
+  replinkValidator = (control: FormControl): { [s: string]: boolean } | null => {
     if (!control.value) {
       return { error: true, required: true };
     } else if (!REP_LINK_REGEXP.test(control.value) || PREVENT_COPY_LINK.test(control.value)) {
@@ -46,7 +46,7 @@ export class IssueEnComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  getFormControl(name) {
+  getFormControl(name: string) {
     if (this.issueType === 'bug') {
       return this.issueBugForm.controls[ name ];
     } else {
@@ -59,7 +59,7 @@ export class IssueEnComponent implements OnInit, OnDestroy {
    * @private
    */
   changeType() {
-    this.searchSubject$.next(null);
+    this.searchSubject$.next('');
   }
 
   /**
@@ -118,7 +118,7 @@ export class IssueEnComponent implements OnInit, OnDestroy {
         nzStyle          : {
           top: '40px'
         },
-        nzComponentParams: {
+        nzData: {
           previewData: this.confirmMarkdown
         },
         nzOnOk           : () => {
@@ -130,10 +130,12 @@ export class IssueEnComponent implements OnInit, OnDestroy {
 
   // 获取版本
   fetchReleases() {
-    this._githubApiService.fetchReleases('NG-ZORRO', 'ng-zorro-antd').subscribe(data => {
+    this._githubApiService.fetchReleases('NG-ZORRO', 'ng-zorro-antd').subscribe((data: any) => {
       this.versions = [];
       for (const i in data) {
-        this.versions.push(data[ i ][ 'tag_name' ]);
+        if (data[i] && data[i]['tag_name']) {
+          this.versions.push(data[i]['tag_name']);
+        }
       }
       this.issueBugForm.controls[ 'version' ].setValue(this.versions[ 0 ]);
     });
@@ -143,7 +145,7 @@ export class IssueEnComponent implements OnInit, OnDestroy {
    * 搜索
    * @param data
    */
-  searchOnChange(data) {
+  searchOnChange(data: string) {
     this.searchSubject$.next(data);
   }
 
@@ -170,7 +172,7 @@ export class IssueEnComponent implements OnInit, OnDestroy {
       nzFooter         : null,
       nzWidth          : 680,
       nzContent        : ModalReproductionComponent,
-      nzComponentParams: {
+      nzData: {
         language: 'en'
       }
     });
