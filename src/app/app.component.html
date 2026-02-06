@@ -5,15 +5,15 @@
         <img src="../assets/img/logo.svg">
         <h1>Issue Helper</h1>
       </div>
-      <div class="">
-        <button nz-button [nzSize]="'small'" nzType="default" (click)="changeLanguage()">
+      <div>
+        <button nz-button nzSize="small" (click)="changeLanguage()">
           {{LANGUAGE === 'zh' ? 'English' : '中文'}}
         </button>
       </div>
     </div>
   </nz-header>
   <nz-content class="content">
-    <router-outlet></router-outlet>
+    <router-outlet />
   </nz-content>
   <nz-footer class="footer">
     Inspired by <a href="https://new-issue.vuejs.org/" target="_blank">Vue Issue Helper</a>·

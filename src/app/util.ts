@@ -1,11 +1,12 @@
 // 匹配预定复现网址
-// tslint:disable-next-line:max-line-length
-export const REP_LINK_REGEXP = /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]*(stackblitz|github|codesandbox)[-A-Za-z0-9+&@#/%?=~_|!:,.;]+/;
+export const REP_LINK_REGEXP =
+  /(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]*(stackblitz|github|codesandbox)[-A-Za-z0-9+&@#/%?=~_|!:,.;]+/;
 // 现有网址不可完全复制
-export const PREVENT_COPY_LINK = /^(https?:\/\/)?((stackblitz\.com\/edit\/ng-zorro-antd-ivy)|(ng-zorro-antd-ivy\.stackblitz\.io)|(codesandbox.io\/s\/ng-zorro-antd-ivy-mp18k))\/?$/i;
+export const PREVENT_COPY_LINK =
+  /^(https?:\/\/)?((stackblitz\.com\/edit\/ng-zorro-antd-ivy)|(ng-zorro-antd-ivy\.stackblitz\.io)|(codesandbox.io\/s\/ng-zorro-antd-ivy-mp18k))\/?$/i;
 
 export function getBugTemplate(bugFormValue: any) {
-  const { link, step, expect_result, exist_result, version, environment, addtion } = bugFormValue;
+  const { link, step, expect_result, exist_result, version, environment, addition } = bugFormValue;
   return `
 ### Reproduction link
 [${link}](${link})
@@ -24,7 +25,7 @@ ${exist_result}
 | ng-zorro-antd | ${version} |
 | Browser | ${environment} |
 
-${addtion ? `---\n${addtion}` : ''}`;
+${addition ? `---\n${addition}` : ''}`;
 }
 
 export function getFeatureTemplate(featFormValue: any) {
@@ -36,4 +37,3 @@ ${motivation}
 ## What does the proposed API look like?
 ${proposal}`;
 }
-

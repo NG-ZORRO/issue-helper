@@ -1,4 +1,4 @@
-@import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+@import '../node_modules/ng-zorro-antd/ng-zorro-antd.less';
 /* You can add global styles to this file, and also import other style files */
 body {
   margin: 0;
@@ -7,7 +7,7 @@ body {
 }
 
 .header {
-  transition: opacity .5s;
+  transition: opacity 0.5s;
   background: @component-background;
 }
 
@@ -64,7 +64,8 @@ p {
     margin-bottom: 15px;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding: 0 15px 15px 15px;
     margin-left: 15px;
   }
@@ -80,7 +81,6 @@ p {
   .explain-paragraph {
     margin-bottom: 0;
   }
-
 }
 
 .footer {
@@ -97,17 +97,21 @@ p {
     border-collapse: collapse;
     margin-bottom: 16px;
 
-    &, th, td {
+    &,
+    th,
+    td {
       border: 1px solid #e8e8e8;
     }
 
     thead {
-      th, td {
+      th,
+      td {
         background: #fafafa;
       }
     }
 
-    th, td {
+    th,
+    td {
       padding: 8px 12px;
     }
   }
@@ -116,7 +120,8 @@ p {
     margin-bottom: 15px;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding: 0 15px 15px 15px;
     margin-left: 15px;
   }
@@ -128,4 +133,12 @@ p {
   ol {
     list-style-type: decimal;
   }
+}
+
+.ant-segmented {
+  width: 100%;
+}
+
+.ant-segmented-item {
+  width: 50%;
 }

@@ -1,38 +1,36 @@
+// TypeScript config file that matches all source files in the project. This file is read by
+// IDEs and TSLint. For IDEs it ensures that `experimentalDecorator` warnings are not showing up.
+// optionalChainNotNullable: https://github.com/angular/angular/issues/46918
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./src",
-    "paths": {},
+    "module": "es2020",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "rootDir": ".",
     "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
-    "strict": false,
-    "noImplicitOverride": false,
-    "noPropertyAccessFromIndexSignature": false,
-    "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": false,
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "nodenext",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
+    "moduleResolution": "bundler",
     "target": "ES2022",
-    "module": "NodeNext",
-    "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
-    "skipLibCheck": true
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "types": [
+      "jasmine"
+    ]
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": false,
-    "strictInputAccessModifiers": false,
-    "strictTemplates": false,
-    "fullTemplateTypeCheck": false,
-    "strictAttributeTypes": false
+    "strictStandalone": true,
+    "typeCheckHostBindings": true,
+    "extendedDiagnostics": {
+      "checks": {
+        "optionalChainNotNullable": "suppress"
+      }
+    }
   }
 }
