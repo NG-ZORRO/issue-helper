@@ -11,7 +11,7 @@ import unusedImports from 'eslint-plugin-unused-imports';
 
 export default tseslint.config(
   {
-    ignores: ['.*/', 'dist/', 'issue-helper/']
+    ignores: ['.*/', 'dist/']
   },
   {
     files: ['**/*.ts'],

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port=4300",
-    "build": "ng build --configuration production --base-href /issue-helper/ --output-path issue-helper/",
+    "build": "ng build --base-href /issue-helper/",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix"
   },
