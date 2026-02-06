@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 @Component({
-  selector   : 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls  : [ './app.component.less' ]
+  selector: 'app-root',
+  imports: [RouterOutlet, NzButtonModule, NzLayoutModule],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'app';
@@ -16,7 +19,7 @@ export class AppComponent {
     }
   }
 
-  changeLanguage() {
+  changeLanguage(): void {
     if (this.LANGUAGE === 'zh') {
       this.LANGUAGE = 'en';
     } else {
@@ -24,6 +27,6 @@ export class AppComponent {
     }
 
     // 切换路由
-    this.router.navigate([ this.LANGUAGE ]).then();
+    this.router.navigate([this.LANGUAGE]).then();
   }
 }

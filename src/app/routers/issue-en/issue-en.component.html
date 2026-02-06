@@ -1,0 +1,259 @@
+<div class="intro paragraph">
+  <div>
+    <h2>Before You Start...</h2>
+    <p>
+      The issue list is reserved exclusively for bug reports and feature requests. That means we do not accept usage
+      questions. If you open an issue that does not conform to the requirements,
+      <strong>it will be closed immediately</strong>
+      .
+      <a (click)="showIntro()">Why are we so strict about this?</a>
+    </p>
+    <p>For usage questions, please use the following resources:</p>
+    <ul>
+      <li>
+        Read the
+        <a href="http://ng.ant.design/docs/introduce/en" target="_blank">docs</a>
+      </li>
+      <li>
+        Look for / ask questions on
+        <a href="https://stackoverflow.com/questions/ask?tags=ng-zorro-antd" target="_blank"> StackOverflow </a>
+        or
+        <a href="https://github.com/NG-ZORRO/ng-zorro-antd/issues" target="_blank">Github</a>
+      </li>
+    </ul>
+    <p>
+      Also try to search for your issue - it may have already been answered or even fixed in the development branch.
+      However, if you find that an old, closed issue still persists in the latest version, you should open a new issue
+      using the form below instead of commenting on the old issue.
+    </p>
+  </div>
+  <div>
+    <form nz-form nzLayout="vertical" [formGroup]="issueType === 'bug' ? issueBugForm : issueFeatureForm">
+      <div nz-row nzGutter="16">
+        <div nz-col [nzSpan]="12">
+          <nz-form-item>
+            <nz-form-label>I am opening an issue for</nz-form-label>
+            <nz-form-control [nzSpan]="24" nzExtra="Please make sure to file the issue at appropriate repo">
+              <nz-select nzVariant="filled" formControlName="repository">
+                @for (repo of repositories; track repo) {
+                  <nz-option [nzLabel]="repo" [nzValue]="repo" />
+                }
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="12">
+          <nz-form-item>
+            <nz-form-label nzFor="issueType">This is a</nz-form-label>
+            <nz-form-control [nzSpan]="24">
+              <nz-segmented
+                [(ngModel)]="issueType"
+                (ngModelChange)="changeType()"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                @for (feature of features; track feature) {
+                  <label nz-segmented-item [nzValue]="feature.value">
+                    {{ feature.label }}
+                  </label>
+                }
+              </nz-segmented>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label nzRequired>Title</nz-form-label>
+            <nz-form-control [nzSpan]="24" nzErrorTip="Title is required">
+              <input
+                nz-input
+                nzVariant="filled"
+                formControlName="issue_title"
+                (ngModelChange)="searchOnChange($event)"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        @if (searchIssues.length > 0) {
+          <div nz-col [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-control [nzSpan]="24">
+                <h3>Similar Issues:</h3>
+                <ul>
+                  @for (issue of searchIssues; track issue) {
+                    <li>
+                      <a target="_blank" href="{{ issue.html_url }}">{{ issue.title }}</a>
+                    </li>
+                  }
+                </ul>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        }
+
+        @if (issueType === 'bug') {
+          <div nz-col [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-label>Version</nz-form-label>
+              <nz-form-control [nzSpan]="24" nzExtra="Please check if the problem exists in the latest version">
+                <nz-select nzVariant="filled" formControlName="version">
+                  @for (version of versions; track version) {
+                    <nz-option [nzLabel]="version" [nzValue]="version" />
+                  }
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="12">
+            <nz-form-item>
+              <nz-form-label nzRequired>Browser</nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="Browser information is required">
+                <input nz-input nzVariant="filled" formControlName="environment" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-label nzRequired>Link to minimal reproduction</nz-form-label>
+              <nz-form-control
+                [nzSpan]="24"
+                [nzExtra]="reproductionLink"
+                nzErrorTip="A stackblitz, codesandbox or github link is required"
+              >
+                <input nz-input nzVariant="filled" formControlName="link" />
+              </nz-form-control>
+              <ng-template #reproductionLink>
+                Please provide a link by forking the link
+                <a href="https://stackblitz.com/edit/ng-zorro-antd-ivy" target="_blank"> stackblitz </a>
+                or
+                <a href="https://codesandbox.io/s/ng-zorro-antd-ivy-mp18k" target="_blank"> codesandbox </a>
+                .
+                <a (click)="showReprod()"> What is a minimal reproduction, and why is it required? </a>
+              </ng-template>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-label nzRequired>Step to reproduce</nz-form-label>
+              <nz-form-control [nzSpan]="24" [nzExtra]="reproductionStep" nzErrorTip="Reproduce step is required">
+                <textarea
+                  rows="2"
+                  nz-input
+                  nzVariant="filled"
+                  formControlName="step"
+                  [nzAutosize]="{ minRows: 2 }"
+                ></textarea>
+              </nz-form-control>
+              <ng-template #reproductionStep>
+                Clear and concise reproduction instructions are important for us to be able to triage your issue in a
+                timely manner. Note that you can use
+                <a href="https://guides.github.com/features/mastering-markdown/" target="_blank"> Markdown </a>
+                to format lists and code.
+              </ng-template>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-label nzRequired>What is expected?</nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="Expected is required">
+                <textarea
+                  rows="2"
+                  nz-input
+                  nzVariant="filled"
+                  formControlName="expect_result"
+                  [nzAutosize]="{ minRows: 2 }"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-label nzRequired>What is actually happening?</nz-form-label>
+              <nz-form-control [nzSpan]="24" nzErrorTip="Actual is required">
+                <textarea
+                  rows="2"
+                  nz-input
+                  nzVariant="filled"
+                  formControlName="exist_result"
+                  [nzAutosize]="{ minRows: 2 }"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-label>Any additional comments? (optional)</nz-form-label>
+              <nz-form-control
+                [nzSpan]="24"
+                nzExtra="e.g. the business scenario or context where you encountered this bug"
+              >
+                <textarea
+                  rows="2"
+                  nz-input
+                  nzVariant="filled"
+                  formControlName="addition"
+                  [nzAutosize]="{ minRows: 2 }"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        }
+
+        @if (issueType === 'feature') {
+          <div nz-col [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-label nzRequired>What problem does this feature solve?</nz-form-label>
+              <nz-form-control [nzSpan]="24" [nzExtra]="featureMotivation" nzErrorTip="This is required">
+                <textarea
+                  rows="2"
+                  nz-input
+                  nzVariant="filled"
+                  formControlName="motivation"
+                  [nzAutosize]="{ minRows: 2 }"
+                ></textarea>
+              </nz-form-control>
+              <ng-template #featureMotivation>
+                <p class="explain-paragraph">
+                  Explain your use case, context, and rationale behind this feature request. More importantly, what is
+                  the
+                  <strong>end user experience</strong>
+                  you are trying to build that led to the need for this feature?
+                </p>
+                <p>
+                  An important design goal of Ant Design is keeping the API surface small and straightforward. In
+                  general, we only consider adding new features that solve a problem that cannot be easily dealt with
+                  using existing APIs (i.e. not just an alternative way of doing things that can already be done). The
+                  problem should also be common enough to justify the addition.
+                </p>
+              </ng-template>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="24">
+            <nz-form-item>
+              <nz-form-label nzRequired>What does the proposed API look like?</nz-form-label>
+              <nz-form-control [nzSpan]="24" [nzExtra]="proposal" nzErrorTip="This is required">
+                <textarea
+                  rows="2"
+                  nz-input
+                  nzVariant="filled"
+                  formControlName="proposal"
+                  [nzAutosize]="{ minRows: 2 }"
+                ></textarea>
+              </nz-form-control>
+              <ng-template #proposal>
+                Describe how you propose to solve the problem and provide code samples of how the API would work once
+                implemented. Note that you can use
+                <a href="https://guides.github.com/features/mastering-markdown/" target="_blank"> Markdown </a>
+                to format your code blocks.
+              </ng-template>
+            </nz-form-item>
+          </div>
+        }
+
+        <div nz-col [nzSpan]="12">
+          <button nz-button nzSize="large" nzType="primary" (click)="submitFormPreview()"> Preview </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
