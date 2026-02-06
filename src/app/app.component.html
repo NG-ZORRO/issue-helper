@@ -2,12 +2,12 @@
   <nz-header class="header">
     <div class="headerContainer">
       <div class="logo">
-        <img src="../assets/img/logo.svg">
+        <img src="../assets/img/logo.svg" />
         <h1>Issue Helper</h1>
       </div>
       <div>
         <button nz-button nzSize="small" (click)="changeLanguage()">
-          {{LANGUAGE === 'zh' ? 'English' : '中文'}}
+          {{ LANGUAGE === 'zh' ? 'English' : '中文' }}
         </button>
       </div>
     </div>
@@ -16,7 +16,9 @@
     <router-outlet />
   </nz-content>
   <nz-footer class="footer">
-    Inspired by <a href="https://new-issue.vuejs.org/" target="_blank">Vue Issue Helper</a>·
+    Inspired by
+    <a href="https://new-issue.vuejs.org/" target="_blank">Vue Issue Helper</a>
+    ·
     <a href="https://github.com/NG-ZORRO/issue-helper">Source Code</a>
   </nz-footer>
 </nz-layout>

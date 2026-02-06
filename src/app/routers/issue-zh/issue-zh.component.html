@@ -22,9 +22,7 @@
       </li>
       <li>
         在
-        <a href="https://stackoverflow.com/questions/ask?tags=ng-zorro-antd" target="_blank">
-          StackOverflow
-        </a>
+        <a href="https://stackoverflow.com/questions/ask?tags=ng-zorro-antd" target="_blank"> StackOverflow </a>
         (英文) 或是
         <a href="https://github.com/NG-ZORRO/ng-zorro-antd/issues" target="_blank">Github</a>
         (issues) 搜索和提问
@@ -32,16 +30,12 @@
     </ul>
     <p>
       最后，在开 issue 前，可以先搜索一下以往的旧 issue -
-      你遇到的问题可能已经有人提了，也可能已经在最新版本中被修正。注意：如果你发现一个已经关闭的旧
-      issue 在最新版本中仍然存在，请不要在旧 issue 下面留言，而应该用下面的表单开一个新的 issue。
+      你遇到的问题可能已经有人提了，也可能已经在最新版本中被修正。注意：如果你发现一个已经关闭的旧 issue
+      在最新版本中仍然存在，请不要在旧 issue 下面留言，而应该用下面的表单开一个新的 issue。
     </p>
   </div>
   <div>
-    <form
-      nz-form
-      nzLayout="vertical"
-      [formGroup]="issueType === 'bug' ? issueBugForm : issueFeatureForm"
-    >
+    <form nz-form nzLayout="vertical" [formGroup]="issueType === 'bug' ? issueBugForm : issueFeatureForm">
       <div nz-row nzGutter="16">
         <div nz-col [nzSpan]="12">
           <nz-form-item>
@@ -135,13 +129,9 @@
               </nz-form-control>
               <ng-template #reproductionLink>
                 请提供一个尽可能精简的链接
-                <a href="https://stackblitz.com/edit/ng-zorro-antd-ivy" target="_blank">
-                  stackblitz
-                </a>
+                <a href="https://stackblitz.com/edit/ng-zorro-antd-ivy" target="_blank"> stackblitz </a>
                 或者
-                <a href="https://codesandbox.io/s/ng-zorro-antd-ivy-mp18k" target="_blank">
-                  codesandbox
-                </a>
+                <a href="https://codesandbox.io/s/ng-zorro-antd-ivy-mp18k" target="_blank"> codesandbox </a>
                 的链接。
                 <a (click)="showReprod()">什么是最小化重现，为什么这是必需的？</a>
               </ng-template>
@@ -150,11 +140,7 @@
           <div nz-col [nzSpan]="24">
             <nz-form-item>
               <nz-form-label nzRequired>重现步骤</nz-form-label>
-              <nz-form-control
-                [nzSpan]="24"
-                [nzExtra]="reproductionStep"
-                nzErrorTip="请填写重现步骤"
-              >
+              <nz-form-control [nzSpan]="24" [nzExtra]="reproductionStep" nzErrorTip="请填写重现步骤">
                 <textarea
                   rows="2"
                   nz-input
@@ -165,9 +151,7 @@
               </nz-form-control>
               <ng-template #reproductionStep>
                 简洁清晰的重现步骤能够帮助我们更迅速地定位问题所在。支持使用
-                <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">
-                  Markdown
-                </a>
+                <a href="https://guides.github.com/features/mastering-markdown/" target="_blank"> Markdown </a>
                 来格式化列表或是代码片段。
               </ng-template>
             </nz-form-item>
@@ -236,8 +220,7 @@
                   催生了这个功能上的需求。
                 </p>
                 <p>
-                  NG-ZORRO的一个重要设计原则是保持 API
-                  的简洁和直接。通常来说，我们只考虑添加在现有的 API
+                  NG-ZORRO的一个重要设计原则是保持 API 的简洁和直接。通常来说，我们只考虑添加在现有的 API
                   下无法轻松实现的功能。新功能的用例应当足够常见。
                 </p>
               </ng-template>
@@ -257,9 +240,7 @@
               </nz-form-control>
               <ng-template #proposal>
                 描述一下你期望这个新功能的 API 是如何使用的，并提供一些代码示例。请用
-                <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">
-                  Markdown
-                </a>
+                <a href="https://guides.github.com/features/mastering-markdown/" target="_blank"> Markdown </a>
                 格式化你的代码片段。
               </ng-template>
             </nz-form-item>
@@ -267,9 +248,7 @@
         }
 
         <div nz-col [nzSpan]="12">
-          <button nz-button nzSize="large" nzType="primary" (click)="submitFormPreview()">
-            预 览
-          </button>
+          <button nz-button nzSize="large" nzType="primary" (click)="submitFormPreview()"> 预 览 </button>
         </div>
       </div>
     </form>

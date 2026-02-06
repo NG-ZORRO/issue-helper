@@ -24,7 +24,9 @@ export class GithubService {
 
   fetchIssues(keyword: string): Observable<GithubIssue[]> {
     return this.http
-      .get<{ items: GithubIssue[] }>(`${this.githubApi}/search/issues?q=is:issue repo:NG-ZORRO/ng-zorro-antd ${keyword}&per_page=5`)
+      .get<{
+        items: GithubIssue[];
+      }>(`${this.githubApi}/search/issues?q=is:issue repo:NG-ZORRO/ng-zorro-antd ${keyword}&per_page=5`)
       .pipe(map(res => res.items || []));
   }
 }

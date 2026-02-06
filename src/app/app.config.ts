@@ -1,10 +1,13 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
-import { provideNzI18n, zh_CN } from 'ng-zorro-antd/i18n';
+
 import { provideMarkdown } from 'ngx-markdown';
-import { routes } from './routes';
+
+import { provideNzI18n, zh_CN } from 'ng-zorro-antd/i18n';
 import { NzModalService } from 'ng-zorro-antd/modal';
+
+import { routes } from './routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [

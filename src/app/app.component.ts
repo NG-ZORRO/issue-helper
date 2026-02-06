@@ -1,6 +1,7 @@
-import { NzButtonModule } from 'ng-zorro-antd/button';
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 @Component({
@@ -18,7 +19,7 @@ export class AppComponent {
     }
   }
 
-  changeLanguage() {
+  changeLanguage(): void {
     if (this.LANGUAGE === 'zh') {
       this.LANGUAGE = 'en';
     } else {
